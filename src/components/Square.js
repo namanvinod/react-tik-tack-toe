@@ -1,6 +1,8 @@
-const Square = () => {
+const Square = props => {
     return (
-        <div>Squares</div>
+        <button className="square" onClick={() => props.squareAction(props.squareIndex)}>
+            {props.squareValue}
+        </button>
     );
 };
 
