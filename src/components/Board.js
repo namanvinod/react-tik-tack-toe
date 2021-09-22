@@ -78,6 +78,7 @@ const Board = props => {
                 {renderSquare(7)}
                 {renderSquare(8)}
             </div>
+            Squares: {squares}
         </div>
     );
 };
