@@ -5,7 +5,11 @@ import './Game.css';
 
 const Game = () => {
     const [winner, setWinner] = useState(null);
-    const onEnding = (player = 'NONE') => (setWinner(player));
+    const onEnding = (player = 'NONE') => {
+        setWinner(player);
+        console.log('winner', winner);
+        return;
+    }
 
     return (
         <div className="game">

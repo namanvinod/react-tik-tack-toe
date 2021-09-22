@@ -10,9 +10,13 @@ const winningCombination = [
 ];
 
 const Board = props => {
-    const [squares, setSquares] = useState(Array(9).fill(null));
+    const initSquares = Array(9).fill(null);
+    const [squares, setSquares] = useState(initSquares);
     const [currentPlayer, setCurrentPlayer] = useState('X');
-    // useEffect(() => (setSquares(updatedSquares)), [updatedSquares]);
+
+    let updatedSquares = initSquares;
+
+    useEffect(() => (checkWinningConditions()), [squares]);
 
     const renderSquare = counter => <Square
                                         squareIndex={counter}
@@ -21,45 +25,49 @@ const Board = props => {
                                     />;
 
     const updateGameState = counter => {
-        if(squares[counter]) {
+        if(checkWinningConditions() || squares[counter]) {
             return;
         }
 
         updateSquare(counter);
         updateCurrentPlayer();
-        // checkWinningConditions();
     };
 
     const updateSquare = counter => {
-        let updatedSquares = [...squares];
+        updatedSquares = [...squares];
         updatedSquares[counter] = currentPlayer;
         setSquares(updatedSquares);
-        // console.log('Updating End', squares, updatedSquares);
     };
 
     const updateCurrentPlayer = () => (setCurrentPlayer(currentPlayer === 'X' ? 'O': 'X'));
     
     const checkWinningConditions = () => {
-        const playerSquares = squares.map((item, index) => item === currentPlayer ? index : '').filter(String);
-        
+        const won = checkWinner('X');
+        if(!won) {
+            checkWinner('O');
+        }
+    };
+
+    const checkWinner = (player) => {
+        let won = false;
+        const playerSquares = squares.map((item, index) => item === player ? index : '').filter(String);
         if(playerSquares && playerSquares.length >= 3) {
             winningCombination.some(combo => {
-                const isWon = combo.every(c => playerSquares.includes(c));     
-                if(isWon) {
-                    props.onEnding(currentPlayer);
+                won = combo.every(c => playerSquares.includes(c));     
+                if(won) {
+                    props.onEnding(player);
                     return true;
                 }
-                if(squares.every(square => square)) {
+                if(!won && squares.every(square => square)) {
                     props.onEnding();
                     return true;
                 }
                 return false;
             })
         }
-    };
-
-    checkWinningConditions();
-
+        return won;
+    }
+    
     return (
         <div>
             <div className="status">{squares.every(square => square) ? '': `Current Player: ${currentPlayer}`}</div>
