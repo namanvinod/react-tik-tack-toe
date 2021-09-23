@@ -10,18 +10,14 @@ const winningCombination = [
 ];
 
 const Game = () => {
-    const initSquares = Array(9).fill(null);
-    const [squares, setSquares] = useState(initSquares);
+    const [squares, setSquares] = useState(Array(9).fill(null));
     const [currentPlayer, setCurrentPlayer] = useState('X');
     const [winner, setWinner] = useState(null);
     
     useEffect(() => (checkWinningConditions()), [squares]);
 
-    const endingGame = (player = 'NONE') => {
-        setWinner(player);
-        console.log('winner', winner);
-        return;
-    }
+    const endingGame = (player = 'NONE') => (setWinner(player));
+    
 
     const updateGameState = counter => {
         if(checkWinningConditions() || squares[counter]) {
