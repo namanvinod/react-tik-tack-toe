@@ -42,10 +42,11 @@ const Board = props => {
     const updateCurrentPlayer = () => (setCurrentPlayer(currentPlayer === 'X' ? 'O': 'X'));
     
     const checkWinningConditions = () => {
-        const won = checkWinner('X');
+        let won = checkWinner('X');
         if(!won) {
-            checkWinner('O');
+           won = checkWinner('O');
         }
+        return won;
     };
 
     const checkWinner = (player) => {
