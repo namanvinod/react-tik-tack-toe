@@ -1,10 +1,14 @@
-import Game from './components/Game';
-
 import './App.css';
+
+import Game from './components/Game';
+import Navbar from './core/components/Navbar';
 
 const App = () => {
   return (
-    <Game />
+    <div className="app-container">
+      <Navbar />
+      <Game />
+    </div>
   );
 };
 
