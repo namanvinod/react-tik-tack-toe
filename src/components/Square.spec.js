@@ -7,7 +7,7 @@ describe('Square', () => {
     let container;
     beforeEach(() => (container = shallow(<Square squareAction={jest.fn()} squareValue={''}/>)));
 
-    it('should render Board', () => {
+    it('should render Square', () => {
 		expect(container.find('button').length).toEqual(1);
     });
 });

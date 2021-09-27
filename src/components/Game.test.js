@@ -9,6 +9,6 @@ describe('Game', () => {
     beforeEach(() => (container = shallow(<Game />)));
 
     it('should render Board', () => {
-		expect(container.containsMatchingElement(<Board />)).toBeTruthy();
+		  expect(container.containsMatchingElement(<Board />)).toBeTruthy();
     });
 });
