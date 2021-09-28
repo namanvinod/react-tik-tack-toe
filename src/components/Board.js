@@ -3,7 +3,7 @@ import './Board.css';
 
 const Board = ({ squares, squareAction }) => {
     const renderSquare = counter => <Square
-                                        className="square"
+                                        className="board-square"
                                         squareIndex={counter}
                                         squareValue={squares[counter]}
                                         squareAction={squareAction}

@@ -34,7 +34,7 @@ describe('Game Play', () => {
     container = mount(<Game />);
     firstBoardRow = container.find('.board-row').first();
     firstSquare = firstBoardRow.find('.square').first();
-    secondSquare = firstBoardRow.find('.square').at(2);
+    secondSquare = firstBoardRow.find('.square').at(1);
     gameInfo = container.find('.game-info');
   });
 
@@ -44,10 +44,10 @@ describe('Game Play', () => {
   });
 
   it('updates the background of first square when it is clicked', () => {  
-    expect(container.find('.board-row').first().find('.square').some('.first-player')).toBeFalsy();
+    expect(container.find('.board-row').first().find('.square').first().hasClass('first-player')).toBeFalsy();
     firstSquare.simulate('click');
-    expect(container.find('.board-row').first().find('.square').some('.first-player')).toBeTruthy();
-    expect(container.find('.board-row').first().find('.square').some('.second-player')).toBeFalsy();
+    expect(container.find('.board-row').first().find('.square').first().hasClass('first-player')).toBeTruthy();
+    expect(container.find('.board-row').first().find('.square').first().hasClass('second-player')).toBeFalsy();
   });
 
   it('updates the value of current player when it is clicked', () => {  
@@ -68,9 +68,12 @@ describe('Game Play', () => {
     
     firstSquare.simulate('click');
     secondSquare.simulate('click');
-    
-    expect(container.find('.board-row').first().find('.square').some('.first-player')).toBeTruthy();
-    expect(container.find('.board-row').first().find('.square').some('.second-player')).toBeTruthy();
+
+    expect(container.find('.board-row').first().find('.square').first().hasClass('first-player')).toBeTruthy();
+    expect(container.find('.board-row').first().find('.square').first().hasClass('second-player')).toBeFalsy();
+
+    expect(container.find('.board-row').first().find('.square').at(1).hasClass('first-player')).toBeFalsy();
+    expect(container.find('.board-row').first().find('.square').at(1).hasClass('second-player')).toBeTruthy();
   });
 
   it('updates the value of current player when two squares are clicked', () => {  

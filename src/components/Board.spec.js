@@ -14,7 +14,7 @@ describe('Board', () => {
     });
 
     it('should render 9 squares', () => {
-      expect(container.find('.square').length).toEqual(9);
+      expect(container.find('.board-square').length).toEqual(9);
     });
 });
 
