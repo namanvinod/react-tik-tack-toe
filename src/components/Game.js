@@ -73,7 +73,8 @@ const Game = () => {
             />
           </div>
           <div className="game-info">
-            <div>{winner ? 
+            <div>
+                {winner ? 
                         winner === 'NONE' ? 'Game is drawn': `Game is won by ${winner}`
                         : squares.every(square => square) 
                             ? '' : `Current Player: ${currentPlayer}`}

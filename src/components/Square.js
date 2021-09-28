@@ -1,9 +1,9 @@
 import './Square.css'
 
-const Square = props => {
+const Square = ({ squareIndex, squareAction, squareValue }) => {
     return (
-        <button className="square" onClick={() => (props.squareAction(props.squareIndex))}>
-            {props.squareValue}
+        <button className="square" onClick={() => (squareAction(squareIndex))}>
+            {squareValue}
         </button>
     );
 };
