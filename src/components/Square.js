@@ -1,6 +1,6 @@
 import './Square.css'
 
-const Square = ({ squareIndex, squareAction, squareValue }) => {
+const Square = ({ squareIndex, squareValue, squareAction }) => {
     return (
         <button className="square" onClick={() => (squareAction(squareIndex))}>
             {squareValue}
