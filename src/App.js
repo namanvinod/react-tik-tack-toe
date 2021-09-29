@@ -1,4 +1,4 @@
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 
 import './App.css';
 
@@ -7,12 +7,12 @@ import RouterOutlet from './core/components/RouteOutlet';
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <div className="app-container">
         <Navbar />
         <RouterOutlet />
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 
