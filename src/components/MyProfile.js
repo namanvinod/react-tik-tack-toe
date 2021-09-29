@@ -1,6 +1,6 @@
 const MyProfile = () => {
     return (
-        <div>This is My Profile</div>
+        <div>This is My Profile.</div>
     );
 };
 
