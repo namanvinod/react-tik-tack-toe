@@ -1,4 +1,5 @@
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { Fragment } from 'react';
+import { Route, Link } from 'react-router-dom';
 
 import './Navbar.css';
 
@@ -8,7 +9,7 @@ import MyProfile from '../../components/MyProfile';
 
 const Navbar = () => {
     return (
-        <Router>
+        <Fragment>
             <div className="nav-container">
                 <ul><Link to="/">Game</Link></ul>
                 <ul><Link to="/about">About</Link></ul>
@@ -17,7 +18,7 @@ const Navbar = () => {
             <Route exact path="/" component={Game}></Route>
             <Route exact path="/about" component={About}></Route>
             <Route exact path="/profile" component={MyProfile}></Route>
-        </Router>
+        </Fragment>
     );
 };
 
