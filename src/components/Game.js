@@ -18,11 +18,8 @@ const Game = () => {
 
     const endingGame = (player = 'NONE') => (setWinner(player));
     
-
     const updateGameState = counter => {
-        if(checkWinningConditions() || squares[counter]) {
-            return;
-        }
+        if(winner || squares[counter]) return;
 
         updateSquare(counter);
         updateCurrentPlayer();
@@ -76,8 +73,8 @@ const Game = () => {
             <div>
                 {winner ? 
                         winner === 'NONE' ? 'Game is drawn': `Game is won by ${winner}`
-                        : squares.every(square => square) 
-                            ? '' : `Current Player: ${currentPlayer}`}
+                        : squares.every(square => square) ? 
+                          '': `Current Player: ${currentPlayer}`}
             </div>
           </div>
         </div>
