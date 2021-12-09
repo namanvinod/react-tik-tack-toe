@@ -2,8 +2,8 @@ import { HashRouter } from 'react-router-dom';
 
 import './App.css';
 
-import Navbar from './core/components/Navbar';
-import RouterOutlet from './core/components/RouteOutlet';
+import Navbar from './core/components/Navbar'; // Default Export
+import { RouterOutlet } from './core/components/RouteOutlet'; // Named Export
 
 const App = () => {
   return (

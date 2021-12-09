@@ -5,14 +5,8 @@ import Game from '../../components/Game';
 import About from '../../components/About';
 import MyProfile from '../../components/MyProfile';
 
-const RouteOutlet = () => {
-    return (
-        <Fragment>
-            <Route exact path="/" component={Game}></Route>
-            <Route exact path="/about" component={About}></Route>
-            <Route exact path="/profile" component={MyProfile}></Route>
-        </Fragment>
-    );
-};
-
-export default RouteOutlet;
+export const RouterOutlet = () =>   <Fragment>
+                                        <Route exact path="/" component={Game}></Route>
+                                        <Route exact path="/about" component={About}></Route>
+                                        <Route exact path="/profile" component={MyProfile}></Route>
+                                    </Fragment>;
