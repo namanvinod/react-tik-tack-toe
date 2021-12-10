@@ -9,8 +9,10 @@ const winningCombination = [
     [3, 4, 5], [6, 7, 8]
 ];
 
+const squareInitValue = Array(9).fill(null);
+
 const Game = () => {
-    const [squares, setSquares] = useState(Array(9).fill(null));
+    const [squares, setSquares] = useState(squareInitValue);
     const [currentPlayer, setCurrentPlayer] = useState('X');
     const [winner, setWinner] = useState(null);
     
@@ -31,7 +33,7 @@ const Game = () => {
         setSquares(updatedSquares);
     };
 
-    const updateCurrentPlayer = () => (setCurrentPlayer(currentPlayer === 'X' ? 'O': 'X'));
+    const updateCurrentPlayer = () => (setCurrentPlayer(player => player === 'X' ? 'O': 'X'));
     
     const checkWinningConditions = () => {
         let won = checkWinner('X');
@@ -61,6 +63,20 @@ const Game = () => {
         return won;
     }
 
+    const createNewGame = () => {
+        resetGame();
+        // TODO: CREATE NEW GAME
+    };
+
+    const resetGame = () => {
+        setSquares(squareInitValue);
+        setWinner('');
+        setCurrentPlayer('X');
+    };
+
+    // console.log('Game: Winner', winner);
+    // console.log('Game: Squares', squares.every(square => square));
+    // squares.map(s=> console.log('Sq Value', s));
     return (
         <div className="game">
           <div className="game-board">
@@ -73,9 +89,13 @@ const Game = () => {
             <div>
                 {winner ? 
                         winner === 'NONE' ? 'Game is drawn': `Game is won by ${winner}`
-                        : squares.every(square => square) ? 
+                        : squares && squares.every(square => square) ? 
                           '': `Current Player: ${currentPlayer}`}
             </div>
+            <div className="action-btn-container">
+              <button onClick={createNewGame}>New Game</button>
+              <button onClick={resetGame} disabled={winner}>Reset Current Game</button>
+          </div>
           </div>
         </div>
     );

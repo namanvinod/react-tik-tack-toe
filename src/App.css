@@ -40,3 +40,12 @@
 ul {
   float: left;
 }
+
+.action-btn-container {
+  padding: 5px 0px;
+}
+
+.action-btn-container button {
+  padding: 5px;
+  margin-left: 5px;;
+}
