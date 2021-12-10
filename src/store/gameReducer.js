@@ -1,20 +1,53 @@
+const currentGameInitValue = {
+    steps: [],
+    winner: ''
+};
+
 const gameStoreInitValue = { 
     games: [], 
-    currentGame: {}
+    currentGame: currentGameInitValue
 };
 
 const gameReducer = (state = gameStoreInitValue, { type, payload }) => {
     switch(type) {
         case 'ADD_NEW_GAME': {
-            console.log('New Game Added', state.games, payload);
-            return { ...state, currentGame: {}, games: [...state.games, payload] };
+            return { 
+                ...state, 
+                games: [
+                    ...state.games, 
+                    payload
+                ], 
+                currentGame: currentGameInitValue 
+            };
         }
         case 'ADD_NEW_MOVE': {
-
+            return { 
+                ...state, 
+                currentGame: { 
+                    ...state.currentGame, 
+                    // steps: [ 
+                    //     ...state.currentGame.steps, 
+                    //     { ...payload.steps } 
+                    // ],
+                    steps: [ ...payload.steps ],      
+                    winner: payload.winner 
+                }
+            };
+        }
+        case 'UPDATE_WINNER': {
+            return { 
+                ...state, 
+                currentGame: { 
+                    ...state.currentGame, 
+                    winner: payload.winner 
+                }
+            };
         }
         case 'RESET_CURRENT_GAME': {
-            console.log('Game Reset');
-            return { ...state, currentGame: {} };
+            return { 
+                ...state, 
+                currentGame: currentGameInitValue 
+            };
         }
         default: return { ...state }; 
     }
