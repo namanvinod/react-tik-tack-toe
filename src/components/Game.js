@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
-import Board from "./Board";
+import Board from './Board';
 import './Game.css';
-
+import { gameStore } from '../store/gameStore';
 const winningCombination = [
     [0, 1, 2], [0, 3, 6], [0, 4, 8],
     [1, 4, 7], [2, 5, 8], [2, 4, 6],
@@ -16,6 +17,8 @@ const Game = () => {
     const [currentPlayer, setCurrentPlayer] = useState('X');
     const [winner, setWinner] = useState(null);
     
+    const dispatch = useDispatch();
+
     useEffect(() => (checkWinningConditions()), [squares]);
 
     const endingGame = (player = 'NONE') => (setWinner(player));
@@ -64,6 +67,7 @@ const Game = () => {
     }
 
     const createNewGame = () => {
+        dispatch({ type: 'ADD_NEW_GAME', payload: squares });
         resetGame();
         // TODO: CREATE NEW GAME
     };
