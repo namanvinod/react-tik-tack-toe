@@ -17,7 +17,7 @@ const winningCombination = [
     [3, 4, 5], [6, 7, 8]
 ];
 
-const squareInitValue = Array(9).fill(null);
+const squareInitValue = [];
 
 const Game = () => {
     const [squares, setSquares] = useState(squareInitValue);
@@ -32,25 +32,29 @@ const Game = () => {
     const endingGame = (player = 'NONE') => (setWinner(player));
     
     const updateGameState = counter => {
-        if(winner || squares[counter]) return;
+        if(winner || (squares && squares.find(sq => sq.index === counter))) return;
 
         updateSquare(counter);
         updateCurrentPlayer();
     };
 
-    const createMove = () => {
-        return squares
-                .map((squareValue, index) => ({ 
-                    index,
-                    squareValue
-                }))
-                .filter(sq => sq.squareValue); 
-    };
+    const createMove = () => (
+        squares.map(
+            ({ index, squareValue}) => ({ 
+                index,
+                squareValue
+            })
+        )
+    );
 
-    const updateSquare = counter => {
-        const updatedSquares = [...squares];
-        updatedSquares[counter] = currentPlayer;
-        setSquares(updatedSquares);
+    const updateSquare = index => {
+        setSquares([ 
+            ...squares, 
+            { 
+                index, 
+                squareValue: currentPlayer 
+            }
+        ]);
     };
 
     const updateCurrentPlayer = () => (setCurrentPlayer(player => player === 'X' ? 'O': 'X'));
@@ -68,7 +72,9 @@ const Game = () => {
 
     const checkWinner = (player) => {
         let won = false;
-        const playerSquares = squares.map((item, index) => item === player ? index : '').filter(String);
+        const playerSquares = squares.map(square => square && square.squareValue === player ? square.index : '').filter(String);
+        playerSquares.sort((first, second) => first - second);
+        
         if(playerSquares && playerSquares.length >= 3) {
             winningCombination.some(combo => {
                 won = combo.every(c => playerSquares.includes(c));     
@@ -76,12 +82,12 @@ const Game = () => {
                     endingGame(player);
                     return true;
                 }
-                if(!won && squares.every(square => square)) {
-                    endingGame();
-                    return true;
-                }
-                return false;
-            })
+            });
+
+            if(!won && squares && squares.length === 9) {
+                endingGame();
+                return true;
+            }
         }
         return won;
     }
@@ -99,9 +105,6 @@ const Game = () => {
         dispatch(resetCurrentGame);        
     };
 
-    // console.log('Game: Winner', winner);
-    console.log('Game: State', gameStore.getState());
-    // squares.map(s=> console.log('Sq Value', s));
     return (
         <div className="game">
           <div className="game-board">
@@ -114,16 +117,16 @@ const Game = () => {
             <div>
                 {winner ? 
                         winner === 'NONE' ? 'Game is drawn': `Game is won by ${winner}`
-                        : squares && squares.every(square => square) ? 
+                        : squares && squares.length === 9 ? 
                           '': `Current Player: ${currentPlayer}`}
             </div>
             <div className="action-btn-container">
-              <button onClick={createNewGame}>New Game</button>
-              <button onClick={resetGame} disabled={winner}>Reset Current Game</button>
-          </div>
+              <button onClick={createNewGame} disabled={squares && !squares.length}>New Game</button>
+              <button onClick={resetGame} disabled={(squares && !squares.length) || winner}>Reset Current Game</button>
+            </div>
           </div>
         </div>
     );
-}
+};
 
 export default Game;

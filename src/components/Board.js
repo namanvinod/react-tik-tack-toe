@@ -5,7 +5,7 @@ const Board = ({ squares, squareAction }) => {
     const renderSquare = counter => <Square
                                         className="board-square"
                                         squareIndex={counter}
-                                        squareValue={squares[counter]}
+                                        squareValue={squares.find(sq => sq.index === counter)?.squareValue}
                                         squareAction={squareAction}
                                     />;
     
