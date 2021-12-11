@@ -82,6 +82,7 @@ const Game = () => {
                     endingGame(player);
                     return true;
                 }
+                return false;
             });
 
             if(!won && squares && squares.length === 9) {
