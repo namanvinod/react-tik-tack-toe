@@ -4,6 +4,12 @@ import { useDispatch } from 'react-redux';
 import Board from './Board';
 import './Game.css';
 import { gameStore } from '../store/gameStore';
+import {
+    addNewGame,
+    addNewMove,
+    updateWinner,
+    resetCurrentGame
+} from '../store/gameActions';
 
 const winningCombination = [
     [0, 1, 2], [0, 3, 6], [0, 4, 8],
@@ -21,7 +27,7 @@ const Game = () => {
     const dispatch = useDispatch();
 
     useEffect(() => (checkWinningConditions()), [squares]);
-    useEffect(() => (dispatch({ type: 'UPDATE_WINNER', payload: { winner }})), [winner]);
+    useEffect(() => (dispatch(updateWinner({ winner }))), [winner]);
     
     const endingGame = (player = 'NONE') => (setWinner(player));
     
@@ -55,7 +61,7 @@ const Game = () => {
            won = checkWinner('O');
         }
 
-        dispatch({ type: 'ADD_NEW_MOVE', payload: { steps: createMove(), winner }});
+        dispatch(addNewMove({ steps: createMove(), winner }));
 
         return won;
     };
@@ -81,7 +87,7 @@ const Game = () => {
     }
 
     const createNewGame = () => {
-        dispatch({ type: 'ADD_NEW_GAME', payload: gameStore.getState().currentGame });
+        dispatch(addNewGame(gameStore.getState().currentGame));
         resetGame();
         // TODO: CREATE NEW GAME
     };
@@ -90,7 +96,7 @@ const Game = () => {
         setSquares(squareInitValue);
         setWinner('');
         setCurrentPlayer('X');
-        dispatch({ type: 'RESET_CURRENT_GAME' });        
+        dispatch(resetCurrentGame);        
     };
 
     // console.log('Game: Winner', winner);
