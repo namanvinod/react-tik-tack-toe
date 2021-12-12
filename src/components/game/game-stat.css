@@ -1,0 +1,16 @@
+.game-stat-container {
+    padding: 20px 0px 0px 60px;
+}
+
+.current-game-moveset {
+
+}
+
+.current-game-moveset .title {
+    font-weight: bold;
+}
+
+.current-game-moveset .current-game-move {
+    padding: 10px 0px 0px 10px;
+    list-style-type: none;
+}
