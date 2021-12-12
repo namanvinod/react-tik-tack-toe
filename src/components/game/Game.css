@@ -1,10 +1,10 @@
-.game {
+.game-container {
     padding: 20px 0px 0px 60px;
     display: flex;
     flex-direction: row;
 }
   
-.game-info {
+.game-info-container {
     margin-left: 20px;
     display: inline-block;
 }

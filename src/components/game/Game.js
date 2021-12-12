@@ -109,14 +109,14 @@ const Game = () => {
     };
 
     return (
-        <div className="game">
+        <div className="game-container">
             <GameBoard 
                 squares={squares}
                 squareAction={updateGameState}
             />
             <GameInfo
                 { ...{ winner, squares, currentPlayer, createNewGame, resetGame } }
-            /> 
+            />
         </div>
     );
 };

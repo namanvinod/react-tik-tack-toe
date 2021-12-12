@@ -1,5 +1,5 @@
 const GameInfo = ({ winner, squares, currentPlayer, createNewGame, resetGame }) => (
-    <div className="game-info">
+    <div className="game-info-container">
         <div>
             {winner ? 
                     winner === 'NONE' ? 'Game is drawn': `Game is won by ${winner}`
