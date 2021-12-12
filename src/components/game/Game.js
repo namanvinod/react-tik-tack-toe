@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
-import Board from '../board/Board';
+import GameBoard from './game-board';
 import './Game.css';
 import { gameStore } from '../../store/gameStore';
 import {
@@ -19,6 +19,7 @@ import {
     squareInitValue,
     currentPlayerInitValue
 } from '../../core/initialValues';
+import GameInfo from './game-info';
 
 const Game = () => {
     const [squares, setSquares] = useState(squareInitValue);
@@ -58,8 +59,8 @@ const Game = () => {
         ]);
     };
 
-    const updateCurrentPlayer = () => (setCurrentPlayer(player => player === PLAYERS.X ? PLAYERS.O: PLAYERS.O));
-    
+    const updateCurrentPlayer = () => (setCurrentPlayer(player => player === PLAYERS.X ? PLAYERS.O: PLAYERS.X));
+
     const checkWinningConditions = () => {
         let won = checkWinner(PLAYERS.X);
         if(!won) {
@@ -109,24 +110,13 @@ const Game = () => {
 
     return (
         <div className="game">
-          <div className="game-board">
-            <Board 
+            <GameBoard 
                 squares={squares}
                 squareAction={updateGameState}
             />
-          </div>
-          <div className="game-info">
-            <div>
-                {winner ? 
-                        winner === 'NONE' ? 'Game is drawn': `Game is won by ${winner}`
-                        : squares && squares.length === 9 ? 
-                          '': `Current Player: ${currentPlayer}`}
-            </div>
-            <div className="action-btn-container">
-              <button onClick={createNewGame} disabled={squares && !squares.length}>New Game</button>
-              <button onClick={resetGame} disabled={(squares && !squares.length) || winner}>Reset Current Game</button>
-            </div>
-          </div>
+            <GameInfo
+                { ...{ winner, squares, currentPlayer, createNewGame, resetGame } }
+            /> 
         </div>
     );
 };
