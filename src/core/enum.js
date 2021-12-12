@@ -1,12 +1,17 @@
 const GAME_STATE = {
-    NEW,
-    IN_PROGRESS,
-    WON,
-    DRAWN
+    NEW: 'NEW',
+    IN_PROGRESS: 'IN_PROGRESS',
+    WON: 'WON',
+    DRAWN: 'DRAWN'
 };
 
 const PLAYERS = {
-    X,
-    O,
-    NONE
+    X: 'X',
+    O: 'O',
+    NONE: 'NONE'
+};
+
+export {
+    GAME_STATE,
+    PLAYERS
 };

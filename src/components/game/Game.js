@@ -10,18 +10,19 @@ import {
     updateWinner,
     resetCurrentGame
 } from '../../store/gameActions';
-
-const winningCombination = [
-    [0, 1, 2], [0, 3, 6], [0, 4, 8],
-    [1, 4, 7], [2, 5, 8], [2, 4, 6],
-    [3, 4, 5], [6, 7, 8]
-];
-
-const squareInitValue = [];
+import {
+    GAME_STATE,
+    PLAYERS
+} from '../../core/enum';
+import {
+    winningCombination,
+    squareInitValue,
+    currentPlayerInitValue
+} from '../../core/initialValues';
 
 const Game = () => {
     const [squares, setSquares] = useState(squareInitValue);
-    const [currentPlayer, setCurrentPlayer] = useState('X');
+    const [currentPlayer, setCurrentPlayer] = useState(currentPlayerInitValue);
     const [winner, setWinner] = useState(null);
     
     const dispatch = useDispatch();
@@ -29,7 +30,7 @@ const Game = () => {
     useEffect(() => (checkWinningConditions()), [squares]);
     useEffect(() => (dispatch(updateWinner({ winner }))), [winner]);
     
-    const endingGame = (player = 'NONE') => (setWinner(player));
+    const endingGame = (player = PLAYERS.NONE) => (setWinner(player));
     
     const updateGameState = counter => {
         if(winner || (squares && squares.find(sq => sq.index === counter))) return;
@@ -57,12 +58,12 @@ const Game = () => {
         ]);
     };
 
-    const updateCurrentPlayer = () => (setCurrentPlayer(player => player === 'X' ? 'O': 'X'));
+    const updateCurrentPlayer = () => (setCurrentPlayer(player => player === PLAYERS.X ? PLAYERS.O: PLAYERS.O));
     
     const checkWinningConditions = () => {
-        let won = checkWinner('X');
+        let won = checkWinner(PLAYERS.X);
         if(!won) {
-           won = checkWinner('O');
+           won = checkWinner(PLAYERS.O);
         }
 
         dispatch(addNewMove({ steps: createMove(), winner }));
@@ -102,7 +103,7 @@ const Game = () => {
     const resetGame = () => {
         setSquares(squareInitValue);
         setWinner('');
-        setCurrentPlayer('X');
+        setCurrentPlayer(currentPlayerInitValue);
         dispatch(resetCurrentGame);        
     };
 

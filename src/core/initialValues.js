@@ -7,3 +7,9 @@ const winningCombination = [
 const squareInitValue = [];
 
 const currentPlayerInitValue = 'X';
+
+export {
+    winningCombination,
+    squareInitValue,
+    currentPlayerInitValue
+};
