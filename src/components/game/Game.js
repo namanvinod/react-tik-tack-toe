@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Fragment } from 'react';
 import { useDispatch } from 'react-redux';
 
 import GameBoard from './game-board';
@@ -20,6 +20,7 @@ import {
     currentPlayerInitValue
 } from '../../core/initialValues';
 import GameInfo from './game-info';
+import GameStat from './game-stat';
 
 const Game = () => {
     const [squares, setSquares] = useState(squareInitValue);
@@ -42,7 +43,7 @@ const Game = () => {
 
     const createMove = () => (
         squares.map(
-            ({ index, squareValue}) => ({ 
+            ({ index, squareValue }) => ({ 
                 index,
                 squareValue
             })
@@ -67,9 +68,11 @@ const Game = () => {
            won = checkWinner(PLAYERS.O);
         }
 
-        dispatch(addNewMove({ steps: createMove(), winner }));
+        if(!won && squares.length === 9) {
+            endingGame();
+        }
 
-        return won;
+        dispatch(addNewMove({ steps: createMove(), winner }));
     };
 
     const checkWinner = (player) => {
@@ -86,19 +89,14 @@ const Game = () => {
                 }
                 return false;
             });
-
-            if(!won && squares && squares.length === 9) {
-                endingGame();
-                return true;
-            }
         }
+
         return won;
-    }
+    };
 
     const createNewGame = () => {
         dispatch(addNewGame(gameStore.getState().currentGame));
         resetGame();
-        // TODO: CREATE NEW GAME
     };
 
     const resetGame = () => {
@@ -108,16 +106,25 @@ const Game = () => {
         dispatch(resetCurrentGame);        
     };
 
+    const handleUndoMove = (squareIndex) => {
+    };
+
     return (
-        <div className="game-container">
-            <GameBoard 
+        <Fragment>
+            <div className="game-container">
+                <GameBoard 
+                    squares={squares}
+                    squareAction={updateGameState}
+                />
+                <GameInfo
+                    { ...{ winner, squares, currentPlayer, createNewGame, resetGame } }
+                />
+            </div>
+            <GameStat
                 squares={squares}
-                squareAction={updateGameState}
+                undoMove={handleUndoMove}
             />
-            <GameInfo
-                { ...{ winner, squares, currentPlayer, createNewGame, resetGame } }
-            />
-        </div>
+        </Fragment>
     );
 };
 

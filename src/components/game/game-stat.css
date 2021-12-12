@@ -14,3 +14,11 @@
     padding: 10px 0px 0px 10px;
     list-style-type: none;
 }
+
+.current-game-moveset button {
+    margin-left: 5px;;
+}
+
+.current-game-moveset .no-moves {
+    padding-top: 10px;
+}
