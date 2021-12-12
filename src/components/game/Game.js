@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
-import Board from './Board';
+import Board from '../board/Board';
 import './Game.css';
-import { gameStore } from '../store/gameStore';
+import { gameStore } from '../../store/gameStore';
 import {
     addNewGame,
     addNewMove,
     updateWinner,
     resetCurrentGame
-} from '../store/gameActions';
+} from '../../store/gameActions';
 
 const winningCombination = [
     [0, 1, 2], [0, 3, 6], [0, 4, 8],
