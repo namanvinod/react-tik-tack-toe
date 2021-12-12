@@ -42,10 +42,14 @@ ul {
 }
 
 .action-btn-container {
-  padding: 5px 0px;
+  padding: 20px 0px;
 }
 
 .action-btn-container button {
   padding: 5px;
   margin-left: 5px;;
+}
+
+.action-btn-container button:first-child {
+  margin-left: 0px;
 }
