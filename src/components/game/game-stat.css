@@ -22,3 +22,7 @@
 .current-game-moveset .no-moves {
     padding-top: 10px;
 }
+
+.current-game-moveset .current-game-moves li:first-child button {
+    display: none
+}

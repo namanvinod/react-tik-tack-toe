@@ -1,5 +1,7 @@
 import './game-stat.css';
 
+const calculateSquare = (index) => `(${parseInt((index/3), 0) + 1},${(index%3) + 1})`;
+
 const GameStat = ({ squares, undoMove }) => (
     <div className="game-stat-container">
         <div className="current-game-moveset">
@@ -8,11 +10,15 @@ const GameStat = ({ squares, undoMove }) => (
             </div>
             {
                 squares && squares.length > 0 ?
-                    squares.map((square, idx) => (
-                        <li key={idx} className="current-game-move">
-                            Move {idx + 1}: {square.squareValue} played {square.index + 1}.<button onClick={() => undoMove(square.index)}>Make This Current Move</button>
-                        </li>
-                    ))
+                    <div className="current-game-moves">
+                        {
+                            [...squares].reverse().map(({ index: squareIndex, squareValue }, idx) => (
+                                <li key={idx} className="current-game-move">
+                                    {`Move ${squares.length - idx}: ${squareValue} played at ${calculateSquare(squareIndex)}.`}
+                                    <button onClick={() => undoMove(squareIndex)}>Make This Current Move</button>
+                                </li>
+                            ))}
+                    </div>
                     : <div className="no-moves">No moves in this game yet.</div>
             }
         </div>        
