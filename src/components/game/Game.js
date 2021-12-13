@@ -133,7 +133,7 @@ const Game = () => {
                     squareAction={updateGameState}
                 />
                 <GameInfo
-                    { ...{ winner, squares, currentPlayer, createNewGame, resetGame } }
+                    { ...{ gameState, currentPlayer, createNewGame, resetGame } }
                 />
             </div>
             <GameStat

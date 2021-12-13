@@ -1,16 +1,25 @@
-const GameInfo = ({ winner, squares, currentPlayer, createNewGame, resetGame }) => (
-    <div className="game-info-container">
-        <div>
-            {winner ? 
-                    winner === 'NONE' ? 'Game is drawn': `Game is won by ${winner}`
-                    : squares && squares.length === 9 ? 
-                        '': `Current Player: ${currentPlayer}`}
+import { useSelector } from "react-redux";
+import { GAME_STATE } from "../../core/enum";
+
+const GameInfo = ({ gameState, currentPlayer, createNewGame, resetGame }) => {
+    const winner = useSelector(state => state.currentGame?.winner);
+
+    return (
+        <div className="game-info-container">
+            <div>
+                {
+                    gameState === GAME_STATE.DRAWN 
+                        ? 'Game is drawn' 
+                        : gameState === GAME_STATE.WON 
+                            ? `Game is won by ${winner}`
+                            : `Current Player: ${currentPlayer}`}
+            </div>
+            <div className="action-btn-container">
+                <button onClick={createNewGame} disabled={gameState === GAME_STATE.NEW}>New Game</button>
+                <button onClick={resetGame} disabled={gameState !== GAME_STATE.IN_PROGRESS}>Reset Current Game</button>
+            </div>
         </div>
-        <div className="action-btn-container">
-            <button onClick={createNewGame} disabled={squares && !squares.length}>New Game</button>
-            <button onClick={resetGame} disabled={(squares && !squares.length) || winner}>Reset Current Game</button>
-        </div>
-    </div>
-);
+    );
+};
 
 export default GameInfo;
