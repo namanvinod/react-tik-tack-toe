@@ -25,11 +25,7 @@ const gameReducer = (state = gameStoreInitValue, { type, payload }) => {
                 ...state, 
                 currentGame: { 
                     ...state.currentGame, 
-                    // steps: [ 
-                    //     ...state.currentGame.steps, 
-                    //     { ...payload.steps } 
-                    // ],
-                    steps: [ ...payload.steps ],      
+                    moveSet: [ ...payload.moveSet ],      
                     winner: payload.winner 
                 }
             };

@@ -75,7 +75,7 @@ const Game = () => {
             endingGame();
         }
 
-        dispatch(addNewMove({ steps: createMoveSet(), winner }));
+        dispatch(addNewMove({ moveSet: createMoveSet(), winner }));
     };
 
     const checkWinner = (player) => {
