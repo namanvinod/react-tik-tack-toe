@@ -1,7 +1,7 @@
 import GameMove from './game-move';
 import './game-stat.css';
 
-const GameStat = ({ squares, undoMove }) => (
+const GameStat = ({ squares, undoMove, canUndo }) => (
     <div className="game-stat-container">
         <div className="current-game-moveset">
             <div className="title">
@@ -13,12 +13,13 @@ const GameStat = ({ squares, undoMove }) => (
                         {
                             [...squares].reverse().map(({ index: squareIndex, squareValue }, idx) => (
                                 <GameMove 
+                                    key={idx}
                                     id={idx}
                                     numOfMoves={squares.length}
                                     squareIndex={squareIndex}
                                     squareValue={squareValue}
                                     undoMove={undoMove}
-                                    canUndo
+                                    canUndo={canUndo}
                                 />
                             ))
                         }

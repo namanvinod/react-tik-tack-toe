@@ -44,7 +44,7 @@ const Game = () => {
         updateCurrentPlayer();
     };
 
-    const createMove = () => (
+    const createMoveSet = () => (
         squares.map(
             ({ index, squareValue }) => ({ 
                 index,
@@ -63,7 +63,7 @@ const Game = () => {
         ]);
     };
 
-    const updateCurrentPlayer = () => (setCurrentPlayer(player => player === PLAYERS.X ? PLAYERS.O: PLAYERS.X));
+    const updateCurrentPlayer = () => (setCurrentPlayer(player => player === PLAYERS.X? PLAYERS.O: PLAYERS.X));
 
     const checkWinningConditions = () => {
         let won = checkWinner(PLAYERS.X);
@@ -75,7 +75,7 @@ const Game = () => {
             endingGame();
         }
 
-        dispatch(addNewMove({ steps: createMove(), winner }));
+        dispatch(addNewMove({ steps: createMoveSet(), winner }));
     };
 
     const checkWinner = (player) => {
@@ -110,6 +110,11 @@ const Game = () => {
     };
 
     const handleUndoMove = (squareIndex) => {
+        const arrIndex = squares.findIndex(square => square.index === squareIndex);
+        const updatedSquares = squares.slice(0, arrIndex + 1);
+        const lastCurrentPlayer = updatedSquares[arrIndex].squareValue;
+        setCurrentPlayer( lastCurrentPlayer === PLAYERS.X? PLAYERS.O: PLAYERS.X);
+        setSquares(updatedSquares);
     };
 
     return (
@@ -126,6 +131,7 @@ const Game = () => {
             <GameStat
                 squares={squares}
                 undoMove={handleUndoMove}
+                canUndo={!(!!winner)}
             />
         </Fragment>
     );
