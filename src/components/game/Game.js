@@ -29,13 +29,17 @@ const Game = () => {
     const [squares, setSquares] = useState(squareInitValue);
     const [currentPlayer, setCurrentPlayer] = useState(currentPlayerInitValue);
     const [winner, setWinner] = useState(null);
-    
+    const [gameState, setGameState] = useState(GAME_STATE.NEW);
+
     const dispatch = useDispatch();
 
     useEffect(() => (checkWinningConditions()), [squares]);
     useEffect(() => (dispatch(updateWinner({ winner }))), [winner]);
     
-    const endingGame = (player = PLAYERS.NONE) => (setWinner(player));
+    const endingGame = (player = PLAYERS.NONE) => {
+        setGameState(player === PLAYERS.NONE ? GAME_STATE.DRAWN: GAME_STATE.WON);
+        setWinner(player);
+    }
     
     const updateGameState = counter => {
         if(winner || (squares && squares.find(sq => sq.index === counter))) return;
@@ -66,6 +70,10 @@ const Game = () => {
     const updateCurrentPlayer = () => (setCurrentPlayer(player => player === PLAYERS.X? PLAYERS.O: PLAYERS.X));
 
     const checkWinningConditions = () => {
+        if(squares && squares.length > 0 && gameState !== GAME_STATE.IN_PROGRESS) {
+            setGameState(GAME_STATE.IN_PROGRESS);
+        }
+
         let won = checkWinner(PLAYERS.X);
         if(!won) {
            won = checkWinner(PLAYERS.O);
