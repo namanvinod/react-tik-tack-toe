@@ -26,24 +26,6 @@ import {
 } from '../../core/initialValues';
 
 const Game = () => {
-    const gameView = (
-        <Fragment>
-            <div className="game-container">
-                <GameBoard 
-                    squares={squares}
-                    squareAction={updateGameState}
-                />
-                <GameInfo
-                    { ...{ winner, squares, currentPlayer, createNewGame, resetGame } }
-                />
-            </div>
-            <GameStat
-                squares={squares}
-                undoMove={handleUndoMove}
-            />
-        </Fragment>
-    );
-
     const [squares, setSquares] = useState(squareInitValue);
     const [currentPlayer, setCurrentPlayer] = useState(currentPlayerInitValue);
     const [winner, setWinner] = useState(null);
@@ -130,7 +112,23 @@ const Game = () => {
     const handleUndoMove = (squareIndex) => {
     };
 
-    return gameView;
+    return (
+        <Fragment>
+            <div className="game-container">
+                <GameBoard 
+                    squares={squares}
+                    squareAction={updateGameState}
+                />
+                <GameInfo
+                    { ...{ winner, squares, currentPlayer, createNewGame, resetGame } }
+                />
+            </div>
+            <GameStat
+                squares={squares}
+                undoMove={handleUndoMove}
+            />
+        </Fragment>
+    );
 };
 
 export default Game;
