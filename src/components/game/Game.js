@@ -1,8 +1,6 @@
 import { useState, useEffect, Fragment } from 'react';
 import { useDispatch } from 'react-redux';
 
-import GameBoard from './game-board';
-import './Game.css';
 import { gameStore } from '../../store/gameStore';
 import {
     addNewGame,
@@ -10,6 +8,13 @@ import {
     updateWinner,
     resetCurrentGame
 } from '../../store/gameActions';
+
+import './Game.css';
+
+import GameBoard from './game-board';
+import GameInfo from './game-info';
+import GameStat from './game-stat';
+
 import {
     GAME_STATE,
     PLAYERS
@@ -19,10 +24,26 @@ import {
     squareInitValue,
     currentPlayerInitValue
 } from '../../core/initialValues';
-import GameInfo from './game-info';
-import GameStat from './game-stat';
 
 const Game = () => {
+    const gameView = (
+        <Fragment>
+            <div className="game-container">
+                <GameBoard 
+                    squares={squares}
+                    squareAction={updateGameState}
+                />
+                <GameInfo
+                    { ...{ winner, squares, currentPlayer, createNewGame, resetGame } }
+                />
+            </div>
+            <GameStat
+                squares={squares}
+                undoMove={handleUndoMove}
+            />
+        </Fragment>
+    );
+
     const [squares, setSquares] = useState(squareInitValue);
     const [currentPlayer, setCurrentPlayer] = useState(currentPlayerInitValue);
     const [winner, setWinner] = useState(null);
@@ -109,23 +130,7 @@ const Game = () => {
     const handleUndoMove = (squareIndex) => {
     };
 
-    return (
-        <Fragment>
-            <div className="game-container">
-                <GameBoard 
-                    squares={squares}
-                    squareAction={updateGameState}
-                />
-                <GameInfo
-                    { ...{ winner, squares, currentPlayer, createNewGame, resetGame } }
-                />
-            </div>
-            <GameStat
-                squares={squares}
-                undoMove={handleUndoMove}
-            />
-        </Fragment>
-    );
+    return gameView;
 };
 
 export default Game;
