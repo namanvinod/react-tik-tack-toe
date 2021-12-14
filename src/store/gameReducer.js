@@ -49,7 +49,7 @@ const gameReducer = (state = gameStoreInitValue, { type, payload }) => {
                     ...state.currentGame,
                     winner: payload.winner,
                     gameState: payload.gameState,
-                    currentPlayer: payload.currentPlayer ?? state.currentGame?.currentPlayer
+                    currentPlayer: payload.currentPlayer
                 }
             };
         }

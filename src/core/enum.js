@@ -8,7 +8,7 @@ const GAME_STATE = {
 const PLAYERS = {
     X: 'X',
     O: 'O',
-    NONE: 'NONE'
+    NONE: ''
 };
 
 export {
