@@ -1,5 +1,5 @@
 import { useState, useEffect, Fragment } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { gameStore } from '../../store/gameStore';
 import {
@@ -28,17 +28,19 @@ import {
 const Game = () => {
     const [squares, setSquares] = useState(squareInitValue);
     const [currentPlayer, setCurrentPlayer] = useState(currentPlayerInitValue);
-    const [winner, setWinner] = useState(null);
     const [gameState, setGameState] = useState(GAME_STATE.NEW);
 
     const dispatch = useDispatch();
 
     useEffect(() => (checkWinningConditions()), [squares]);
-    useEffect(() => (dispatch(updateWinner({ winner }))), [winner]);
     
+    const winner = useSelector(state => state.currentGame?.winner);
+
     const endingGame = (player = PLAYERS.NONE) => {
         setGameState(player === PLAYERS.NONE ? GAME_STATE.DRAWN: GAME_STATE.WON);
-        setWinner(player);
+        if(player !== PLAYERS.NONE) {
+            dispatch(updateWinner({ winner: player }));
+        }
     }
     
     const updateGameState = counter => {
@@ -70,6 +72,8 @@ const Game = () => {
     const updateCurrentPlayer = () => (setCurrentPlayer(player => player === PLAYERS.X? PLAYERS.O: PLAYERS.X));
 
     const checkWinningConditions = () => {
+        dispatch(addNewMove({ moveSet: createMoveSet() }));
+        
         if(squares && squares.length > 0 && gameState !== GAME_STATE.IN_PROGRESS) {
             setGameState(GAME_STATE.IN_PROGRESS);
         }
@@ -82,8 +86,6 @@ const Game = () => {
         if(!won && squares.length === 9) {
             endingGame();
         }
-
-        dispatch(addNewMove({ moveSet: createMoveSet(), winner }));
     };
 
     const checkWinner = (player) => {
@@ -112,7 +114,7 @@ const Game = () => {
 
     const resetGame = () => {
         setSquares(squareInitValue);
-        setWinner('');
+        dispatch(updateWinner({ winner: '' }));
         setCurrentPlayer(currentPlayerInitValue);
         dispatch(resetCurrentGame);        
     };
