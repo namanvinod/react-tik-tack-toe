@@ -1,9 +1,10 @@
-import { GAME_STATE } from "../core/enum";
+import { GAME_STATE, PLAYERS } from "../core/enum";
 
 const currentGameInitValue = {
     moveSet: [],
     winner: '',
-    gameState: GAME_STATE.NEW
+    gameState: GAME_STATE.NEW,
+    currentPlayer: PLAYERS.X
 };
 
 const gameStoreInitValue = { 
@@ -38,7 +39,18 @@ const gameReducer = (state = gameStoreInitValue, { type, payload }) => {
                 currentGame: {
                     ...state.currentGame,
                     winner: payload.winner,
-                    gameState: payload.gameState
+                    gameState: payload.gameState,
+                    currentPlayer: payload.currentPlayer ?? state.currentGame?.currentPlayer
+                }
+            };
+        }
+        case 'UPDATE_CURRENT_PLAYER': {
+            console.log('In Reducer', payload);
+            return {
+                ...state,
+                currentGame: {
+                    ...state.currentGame,
+                    currentPlayer: payload.currentPlayer
                 }
             };
         }

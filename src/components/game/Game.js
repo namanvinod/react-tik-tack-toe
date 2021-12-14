@@ -6,6 +6,7 @@ import {
     addNewGame,
     addNewMove,
     updateGameState,
+    updateCurrentPlayer,
     resetCurrentGame
 } from '../../store/gameActions';
 
@@ -27,26 +28,27 @@ import {
 
 const Game = () => {
     const [squares, setSquares] = useState(squareInitValue);
-    const [currentPlayer, setCurrentPlayer] = useState(currentPlayerInitValue);
-    const [gameState, setGameState] = useState(GAME_STATE.NEW);
 
     const dispatch = useDispatch();
 
     useEffect(() => (checkWinningConditions()), [squares]);
     
     const winner = useSelector(state => state.currentGame?.winner);
+    const gameState = useSelector(state => state.currentGame?.gameState);
+    const currentPlayer = useSelector(state => state.currentGame?.currentPlayer);
+    const currentGame = useSelector(state => state.currentGame);
 
     const endingGame = (player = PLAYERS.NONE) => {
-        const gameState = player === PLAYERS.NONE ? GAME_STATE.DRAWN: GAME_STATE.WON;
+        const currentGameState = player === PLAYERS.NONE ? GAME_STATE.DRAWN : GAME_STATE.WON;
         const winner = player !== PLAYERS.NONE ? player: '';
-        dispatch(updateGameState({ gameState: gameState, winner: winner }));
+        dispatch(updateGameState({ gameState: currentGameState, winner: winner }));
     }
     
     const updateCurrentGame = counter => {
         if(winner || (squares && squares.find(sq => sq.index === counter))) return;
 
         updateSquare(counter);
-        updateCurrentPlayer();
+        dispatch(updateCurrentPlayer({ currentPlayer: PLAYERS.X ? PLAYERS.O : PLAYERS.X }));
     };
 
     const createMoveSet = () => (
@@ -67,8 +69,6 @@ const Game = () => {
             }
         ]);
     };
-
-    const updateCurrentPlayer = () => (setCurrentPlayer(player => player === PLAYERS.X? PLAYERS.O: PLAYERS.X));
 
     const checkWinningConditions = () => {
         dispatch(addNewMove({ moveSet: createMoveSet() }));
@@ -113,8 +113,6 @@ const Game = () => {
 
     const resetGame = () => {
         setSquares(squareInitValue);
-        dispatch(updateWinner({ winner: '' }));
-        setCurrentPlayer(currentPlayerInitValue);
         dispatch(resetCurrentGame);        
     };
 
@@ -122,7 +120,7 @@ const Game = () => {
         const arrIndex = squares.findIndex(square => square.index === squareIndex);
         const updatedSquares = squares.slice(0, arrIndex + 1);
         const lastCurrentPlayer = updatedSquares[arrIndex].squareValue;
-        setCurrentPlayer( lastCurrentPlayer === PLAYERS.X? PLAYERS.O: PLAYERS.X);
+        dispatch(updateCurrentPlayer({ currentPlayer: currentPlayer === PLAYERS.X ? PLAYERS.O : PLAYERS.X }));
         setSquares(updatedSquares);
     };
 
@@ -134,7 +132,6 @@ const Game = () => {
                     squareAction={updateCurrentGame}
                 />
                 <GameInfo
-                    currentPlayer={currentPlayer} 
                     createNewGame={createNewGame}
                     resetGame={resetGame}
                 />
