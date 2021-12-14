@@ -16,10 +16,6 @@ const GameInfo = ({ createNewGame, resetGame }) => {
                             ? `Game is won by ${winner}`
                             : `Current Player: ${currentPlayer}`}
             </div>
-            <div className="action-btn-container">
-                <button onClick={createNewGame} disabled={gameState === GAME_STATE.NEW}>New Game</button>
-                <button onClick={resetGame} disabled={gameState !== GAME_STATE.IN_PROGRESS}>Reset Current Game</button>
-            </div>
         </div>
     );
 };

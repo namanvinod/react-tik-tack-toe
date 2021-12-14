@@ -1,0 +1,12 @@
+.action-btn-container {
+    padding-top: 20px;
+  }
+
+.action-btn-container button {
+    padding: 5px;
+    margin-left: 5px;;
+  }
+  
+  .action-btn-container button:first-child {
+    margin-left: 0px;
+  }

@@ -8,6 +8,7 @@ import './Game.css';
 import GameBoard from './game-board';
 import GameInfo from './game-info';
 import GameStat from './game-stat';
+import ActionBtnContainer from '../action-btn-container/action-btn-container';
 
 import { GAME_STATE, PLAYERS } from '../../core/enum';
 import { winningCombination } from '../../core/initialValues';
@@ -82,7 +83,7 @@ const Game = () => {
 
     const createNewGame = () => (dispatch(addNewGame(currentGame)));
 
-    const resetGame = () => (dispatch(resetCurrentGame));
+    const resetGame = () => (dispatch(resetCurrentGame()));
 
     const handleUndoMove = squareIndex => {
         const arrIndex = squares.findIndex(square => square.index === squareIndex);
@@ -98,10 +99,13 @@ const Game = () => {
                 <GameBoard 
                     squareAction={updateCurrentGame}
                 />
-                <GameInfo
-                    createNewGame={createNewGame}
-                    resetGame={resetGame}
-                />
+                <div className="game-details-container">
+                    <GameInfo />
+                    <ActionBtnContainer 
+                        createNewGame={createNewGame}
+                        resetGame={resetGame}
+                    />
+                </div>             
             </div>
             <GameStat
                 undoMove={handleUndoMove}
