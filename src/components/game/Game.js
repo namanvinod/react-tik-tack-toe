@@ -96,7 +96,6 @@ const Game = () => {
         <Fragment>
             <div className="game-container">
                 <GameBoard 
-                    squares={squares}
                     squareAction={updateCurrentGame}
                 />
                 <GameInfo
@@ -105,9 +104,7 @@ const Game = () => {
                 />
             </div>
             <GameStat
-                squares={squares}
                 undoMove={handleUndoMove}
-                canUndo={!(!!winner)}
             />
         </Fragment>
     );

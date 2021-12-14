@@ -1,7 +1,10 @@
+import { useSelector } from 'react-redux';
 import Square from '../square/Square';
 import './Board.css';
 
-const Board = ({ squares, squareAction }) => {
+const Board = ({ squareAction }) => {
+    const squares = useSelector(state => state.currentGame?.moveSet);
+    
     const renderSquare = counter => <Square
                                         className="board-square"
                                         squareIndex={counter}
