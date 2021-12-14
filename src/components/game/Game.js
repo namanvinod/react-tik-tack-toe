@@ -1,14 +1,7 @@
-import { useState, useEffect, Fragment } from 'react';
+import { useEffect, Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { gameStore } from '../../store/gameStore';
-import {
-    addNewGame,
-    updateSquares,
-    updateGameState,
-    updateCurrentPlayer,
-    resetCurrentGame
-} from '../../store/gameActions';
+import { addNewGame, updateSquares, updateGameState, updateCurrentPlayer, resetCurrentGame } from '../../store/gameActions';
 
 import './Game.css';
 
@@ -25,9 +18,7 @@ const Game = () => {
     const gameState = useSelector(state => state.currentGame?.gameState);
     const currentPlayer = useSelector(state => state.currentGame?.currentPlayer);
     const currentGame = useSelector(state => state.currentGame);
-    const state = useSelector(state => state);
 
-    console.log(state);
     const dispatch = useDispatch();
     useEffect(() => (checkWinningConditions()), [squares]);
     
@@ -89,9 +80,7 @@ const Game = () => {
         return won;
     };
 
-    const createNewGame = () => {
-        dispatch(addNewGame(currentGame));
-    };
+    const createNewGame = () => (dispatch(addNewGame(currentGame)));
 
     const resetGame = () => (dispatch(resetCurrentGame));
 
