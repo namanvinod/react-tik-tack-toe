@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { gameStore } from '../../store/gameStore';
 import {
     addNewGame,
-    addNewMove,
+    updateSquares,
     updateGameState,
     updateCurrentPlayer,
     resetCurrentGame
@@ -16,21 +16,13 @@ import GameBoard from './game-board';
 import GameInfo from './game-info';
 import GameStat from './game-stat';
 
-import {
-    GAME_STATE,
-    PLAYERS
-} from '../../core/enum';
-import {
-    winningCombination,
-    squareInitValue,
-    currentPlayerInitValue
-} from '../../core/initialValues';
+import { GAME_STATE, PLAYERS } from '../../core/enum';
+import { winningCombination } from '../../core/initialValues';
 
 const Game = () => {
-    const [squares, setSquares] = useState(squareInitValue);
-
     const dispatch = useDispatch();
 
+    const squares = useSelector(state => state.currentGame?.moveSet);
     useEffect(() => (checkWinningConditions()), [squares]);
     
     const winner = useSelector(state => state.currentGame?.winner);
@@ -61,18 +53,17 @@ const Game = () => {
     );
 
     const updateSquare = index => {
-        setSquares([ 
+        const newSquares = [ 
             ...squares, 
             { 
                 index, 
                 squareValue: currentPlayer 
             }
-        ]);
+        ];
+        dispatch(updateSquares({ squares: newSquares }));
     };
 
     const checkWinningConditions = () => {
-        dispatch(addNewMove({ moveSet: createMoveSet() }));
-        
         if(squares && squares.length > 0 && gameState !== GAME_STATE.IN_PROGRESS) {
             dispatch(updateGameState({ gameState: GAME_STATE.IN_PROGRESS }));
         }
@@ -107,21 +98,18 @@ const Game = () => {
     };
 
     const createNewGame = () => {
-        dispatch(addNewGame(gameStore.getState().currentGame));
+        dispatch(addNewGame(currentGame));
         resetGame();
     };
 
-    const resetGame = () => {
-        setSquares(squareInitValue);
-        dispatch(resetCurrentGame);        
-    };
+    const resetGame = () => (dispatch(resetCurrentGame));
 
     const handleUndoMove = (squareIndex) => {
         const arrIndex = squares.findIndex(square => square.index === squareIndex);
         const updatedSquares = squares.slice(0, arrIndex + 1);
         const lastCurrentPlayer = updatedSquares[arrIndex].squareValue;
         dispatch(updateCurrentPlayer({ currentPlayer: lastCurrentPlayer === PLAYERS.X ? PLAYERS.O : PLAYERS.X }));
-        setSquares(updatedSquares);
+        dispatch(updateSquares({ squares: updatedSquares }));
     };
 
     return (

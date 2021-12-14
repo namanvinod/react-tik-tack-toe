@@ -33,6 +33,15 @@ const gameReducer = (state = gameStoreInitValue, { type, payload }) => {
                 }
             };
         }
+        case 'UPDATE_SQUARES': {
+            return {
+                ...state,
+                currentGame: {
+                    ...state.currentGame,
+                    moveSet: [ ...payload.squares ]
+                }
+            };
+        }
         case 'UPDATE_GAME_STATE': {
             return {
                 ...state,
@@ -45,7 +54,6 @@ const gameReducer = (state = gameStoreInitValue, { type, payload }) => {
             };
         }
         case 'UPDATE_CURRENT_PLAYER': {
-            console.log('In Reducer', payload);
             return {
                 ...state,
                 currentGame: {
