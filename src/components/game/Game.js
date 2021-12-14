@@ -48,7 +48,7 @@ const Game = () => {
         if(winner || (squares && squares.find(sq => sq.index === counter))) return;
 
         updateSquare(counter);
-        dispatch(updateCurrentPlayer({ currentPlayer: PLAYERS.X ? PLAYERS.O : PLAYERS.X }));
+        dispatch(updateCurrentPlayer({ currentPlayer: currentPlayer === PLAYERS.X ? PLAYERS.O : PLAYERS.X }));
     };
 
     const createMoveSet = () => (
@@ -120,7 +120,7 @@ const Game = () => {
         const arrIndex = squares.findIndex(square => square.index === squareIndex);
         const updatedSquares = squares.slice(0, arrIndex + 1);
         const lastCurrentPlayer = updatedSquares[arrIndex].squareValue;
-        dispatch(updateCurrentPlayer({ currentPlayer: currentPlayer === PLAYERS.X ? PLAYERS.O : PLAYERS.X }));
+        dispatch(updateCurrentPlayer({ currentPlayer: lastCurrentPlayer === PLAYERS.X ? PLAYERS.O : PLAYERS.X }));
         setSquares(updatedSquares);
     };
 
