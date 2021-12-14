@@ -1,8 +1,9 @@
 import { useSelector } from "react-redux";
 import { GAME_STATE } from "../../core/enum";
 
-const GameInfo = ({ gameState, currentPlayer, createNewGame, resetGame }) => {
+const GameInfo = ({ currentPlayer, createNewGame, resetGame }) => {
     const winner = useSelector(state => state.currentGame?.winner);
+    const gameState = useSelector(state => state.currentGame?.gameState);
 
     return (
         <div className="game-info-container">

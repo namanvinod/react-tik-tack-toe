@@ -5,7 +5,7 @@ import { gameStore } from '../../store/gameStore';
 import {
     addNewGame,
     addNewMove,
-    updateWinner,
+    updateGameState,
     resetCurrentGame
 } from '../../store/gameActions';
 
@@ -37,13 +37,12 @@ const Game = () => {
     const winner = useSelector(state => state.currentGame?.winner);
 
     const endingGame = (player = PLAYERS.NONE) => {
-        setGameState(player === PLAYERS.NONE ? GAME_STATE.DRAWN: GAME_STATE.WON);
-        if(player !== PLAYERS.NONE) {
-            dispatch(updateWinner({ winner: player }));
-        }
+        const gameState = player === PLAYERS.NONE ? GAME_STATE.DRAWN: GAME_STATE.WON;
+        const winner = player !== PLAYERS.NONE ? player: '';
+        dispatch(updateGameState({ gameState: gameState, winner: winner }));
     }
     
-    const updateGameState = counter => {
+    const updateCurrentGame = counter => {
         if(winner || (squares && squares.find(sq => sq.index === counter))) return;
 
         updateSquare(counter);
@@ -75,7 +74,7 @@ const Game = () => {
         dispatch(addNewMove({ moveSet: createMoveSet() }));
         
         if(squares && squares.length > 0 && gameState !== GAME_STATE.IN_PROGRESS) {
-            setGameState(GAME_STATE.IN_PROGRESS);
+            dispatch(updateGameState({ gameState: GAME_STATE.IN_PROGRESS }));
         }
 
         let won = checkWinner(PLAYERS.X);
@@ -132,10 +131,12 @@ const Game = () => {
             <div className="game-container">
                 <GameBoard 
                     squares={squares}
-                    squareAction={updateGameState}
+                    squareAction={updateCurrentGame}
                 />
                 <GameInfo
-                    { ...{ gameState, currentPlayer, createNewGame, resetGame } }
+                    currentPlayer={currentPlayer} 
+                    createNewGame={createNewGame}
+                    resetGame={resetGame}
                 />
             </div>
             <GameStat
