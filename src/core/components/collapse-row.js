@@ -4,7 +4,7 @@ const CollapseRow = ({ isDataAvailable, showData, handleToggle }) => {
             {
                 isDataAvailable &&
                 <div 
-                    className={`fas ${showData ? 'fa-chevron-circle-up': 'fa-chevron-circle-down'}`}
+                    className={`margin-left-5 fas ${showData ? 'fa-chevron-circle-up': 'fa-chevron-circle-down'}`}
                     onClick={handleToggle}
                 >
                 </div>

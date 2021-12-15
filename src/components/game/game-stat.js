@@ -20,17 +20,9 @@ const GameStat = ({ undoMove }) => {
                     Current Game Moves
                     <CollapseRow 
                         isDataAvailable={isMoveSetAvailable}
-                        showDetails={showMoves}
+                        showData={showMoves}
                         handleToggle={(() => setShowMoves(!showMoves))}
                     />
-                    {/* {
-                        isMoveSetAvailable &&
-                        <div 
-                            className={`fas ${showMoves ? 'fa-chevron-circle-up': 'fa-chevron-circle-down'}`}
-                            onClick={(() => setShowMoves(!showMoves))}
-                        >
-                        </div>
-                    } */}
                 </div>
                 {
                     showMoves && (
