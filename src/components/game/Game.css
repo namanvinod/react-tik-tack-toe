@@ -1,13 +1,4 @@
-.master-container {
+.game {
     display: flex;
     flex-direction: row;
-}
-.game-container {
-    padding: 20px 0px 0px 60px;
-    display: flex;
-    flex-direction: row;
-}
-
-.game-details-container {
-    padding: 0px 20px;
 }

@@ -5,11 +5,9 @@ import { addNewGame, updateSquares, updateGameState, updateCurrentPlayer, resetC
 
 import './Game.css';
 
-import GameBoard from './game-board';
-import GameInfo from './game-info';
 import GameStat from './game-stat';
-import ActionBtnContainer from '../action-btn-container/action-btn-container';
 import SessionStat from '../session-stat/session-stat';
+import GameContainer from './game-container';
 
 import { GAME_STATE, PLAYERS } from '../../core/enum';
 import { winningCombination } from '../../core/initialValues';
@@ -95,20 +93,13 @@ const Game = () => {
     };
 
     return (
-        <div className="master-container">
+        <div className="game">
             <div>
-                <div className="game-container">
-                    <GameBoard
-                        squareAction={updateCurrentGame}
-                    />
-                    <div className="game-details-container">
-                        <GameInfo />
-                        <ActionBtnContainer
-                            createNewGame={createNewGame}
-                            resetGame={resetGame}
-                        />
-                    </div>
-                </div>
+                <GameContainer 
+                    updateCurrentGame={updateCurrentGame}
+                    createNewGame={createNewGame}
+                    resetGame={resetGame}
+                />
                 <SessionStat />
             </div>
             <GameStat
