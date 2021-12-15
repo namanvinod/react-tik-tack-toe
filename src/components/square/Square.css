@@ -28,3 +28,7 @@
   .second-player {
     background-color: lightgreen;
   }
+
+  .disabled-square {
+    background-color: lightgray;
+  }

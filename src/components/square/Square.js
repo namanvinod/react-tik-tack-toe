@@ -1,8 +1,19 @@
-import './Square.css'
+import { useSelector } from 'react-redux';
+import classNames from 'classnames';
+import { GAME_STATE, PLAYERS } from '../../core/enum';
+import './Square.css';
 
 const Square = ({ squareIndex, squareValue, squareAction }) => {
+    const gameState = useSelector(state => state.currentGame?.gameState);
+    const classes = classNames({
+        square: true,
+        'first-player': squareValue === PLAYERS.X,
+        'second-player': squareValue === PLAYERS.O,
+        'disabled-square': !squareValue && gameState === GAME_STATE.WON
+    });
+
     return (
-        <button className={`square ${squareValue ? squareValue === 'X' ? 'first-player' : 'second-player' : ''}`} onClick={() => (squareAction(squareIndex))}>
+        <button className={classes} onClick={() => (squareAction(squareIndex))}>
             {squareValue}
         </button>
     );
