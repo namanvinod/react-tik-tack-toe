@@ -9,6 +9,7 @@ import GameBoard from './game-board';
 import GameInfo from './game-info';
 import GameStat from './game-stat';
 import ActionBtnContainer from '../action-btn-container/action-btn-container';
+import SessionStat from '../session-stat/session-stat';
 
 import { GAME_STATE, PLAYERS } from '../../core/enum';
 import { winningCombination } from '../../core/initialValues';
@@ -110,6 +111,7 @@ const Game = () => {
             <GameStat
                 undoMove={handleUndoMove}
             />
+            <SessionStat />
         </Fragment>
     );
 };
