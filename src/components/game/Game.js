@@ -1,15 +1,13 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { addNewGame, updateSquares, updateGameState, updateCurrentPlayer, resetCurrentGame } from '../../store/gameActions';
+import { addCurrentGameToGames, updateSquares, updateGameState, updateCurrentPlayer, resetCurrentGame } from '../../store/gameActions';
 
 import './Game.css';
 
-import GameBoard from './game-board';
-import GameInfo from './game-info';
 import GameStat from './game-stat';
-import ActionBtnContainer from '../action-btn-container/action-btn-container';
 import SessionStat from '../session-stat/session-stat';
+import GameContainer from './game-container';
 
 import { GAME_STATE, PLAYERS } from '../../core/enum';
 import { winningCombination } from '../../core/initialValues';
@@ -19,7 +17,6 @@ const Game = () => {
     const winner = useSelector(state => state.currentGame?.winner);
     const gameState = useSelector(state => state.currentGame?.gameState);
     const currentPlayer = useSelector(state => state.currentGame?.currentPlayer);
-    const currentGame = useSelector(state => state.currentGame);
 
     const dispatch = useDispatch();
     useEffect(() => (checkWinningConditions()), [squares]);
@@ -28,6 +25,7 @@ const Game = () => {
         const currentGameState = player === PLAYERS.NONE ? GAME_STATE.DRAWN : GAME_STATE.WON;
         const winner = player !== PLAYERS.NONE ? player: '';
         dispatch(updateGameState({ gameState: currentGameState, winner: winner, currentPlayer: PLAYERS.NONE }));
+        dispatch(addCurrentGameToGames());
     }
     
     const updateCurrentGame = counter => {
@@ -82,7 +80,13 @@ const Game = () => {
         return won;
     };
 
-    const createNewGame = () => (dispatch(addNewGame({ ...currentGame, gameState: gameState === GAME_STATE.IN_PROGRESS ? GAME_STATE.FORFEITED : gameState })));
+    const createNewGame = () => {
+        if(gameState === GAME_STATE.IN_PROGRESS) {
+            dispatch(updateGameState({ gameState: GAME_STATE.FORFEITED, winner: winner, currentPlayer: PLAYERS.NONE }));
+            dispatch(addCurrentGameToGames());
+        }
+        resetGame();
+    };
 
     const resetGame = () => (dispatch(resetCurrentGame()));
 
@@ -95,20 +99,13 @@ const Game = () => {
     };
 
     return (
-        <div className="master-container">
+        <div className="game">
             <div>
-                <div className="game-container">
-                    <GameBoard
-                        squareAction={updateCurrentGame}
-                    />
-                    <div className="game-details-container">
-                        <GameInfo />
-                        <ActionBtnContainer
-                            createNewGame={createNewGame}
-                            resetGame={resetGame}
-                        />
-                    </div>
-                </div>
+                <GameContainer 
+                    updateCurrentGame={updateCurrentGame}
+                    createNewGame={createNewGame}
+                    resetGame={resetGame}
+                />
                 <SessionStat />
             </div>
             <GameStat
