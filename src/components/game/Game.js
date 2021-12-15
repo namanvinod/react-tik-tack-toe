@@ -82,7 +82,7 @@ const Game = () => {
         return won;
     };
 
-    const createNewGame = () => (dispatch(addNewGame(currentGame)));
+    const createNewGame = () => (dispatch(addNewGame({ ...currentGame, gameState: gameState === GAME_STATE.IN_PROGRESS ? GAME_STATE.FORFEITED : gameState })));
 
     const resetGame = () => (dispatch(resetCurrentGame()));
 
