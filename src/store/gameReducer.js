@@ -14,14 +14,13 @@ const gameStoreInitValue = {
 
 const gameReducer = (state = gameStoreInitValue, { type, payload }) => {
     switch(type) {
-        case 'ADD_NEW_GAME': {
+        case 'ADD_CURRENTGAME_TO_GAMES': {
             return { 
                 ...state, 
                 games: [
                     ...state.games, 
-                    payload
-                ], 
-                currentGame: currentGameInitValue 
+                    state.currentGame
+                ] 
             };
         }
         case 'ADD_NEW_MOVE': {

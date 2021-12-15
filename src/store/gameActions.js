@@ -1,6 +1,6 @@
 const gameAction = (type, payload) => ({ type, payload });
 
-const addNewGame = payload => (gameAction('ADD_NEW_GAME', payload));
+const addCurrentGameToGames = payload => (gameAction('ADD_CURRENTGAME_TO_GAMES', payload));
 
 const addNewMove = payload => (gameAction('ADD_NEW_MOVE', payload)); 
 
@@ -13,7 +13,7 @@ const updateCurrentPlayer = payload => (gameAction('UPDATE_CURRENT_PLAYER', payl
 const resetCurrentGame = () => ({ type: 'RESET_CURRENT_GAME' });
 
 export {
-    addNewGame,
+    addCurrentGameToGames,
     addNewMove,
     updateSquares,
     updateGameState,
