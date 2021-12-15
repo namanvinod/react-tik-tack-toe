@@ -1,5 +1,8 @@
 import { useSelector } from 'react-redux';
 import { GAME_STATE, PLAYERS } from '../../core/enum';
+
+import SessionStatRow from './session-stat-row';
+
 import './session-stat.css';
 
 const SessionStat = () => {
@@ -24,26 +27,15 @@ const SessionStat = () => {
             <div className="section-title">
                 Current Session Stat
             </div>
-            <div className="session-stat-row">
-                <label>Total Games: </label>
-                <label>{games.length}</label>
-            </div>
-            <div className="session-stat-row">
-                <label>Total Games Won By X: </label>
-                <label>{gamesWonByX.length}</label>
-            </div>
-            <div className="session-stat-row">
-                <label>Total Games WON by O: </label>
-                <label>{gamesWonByO.length}</label>
-            </div>
-            <div className="session-stat-row">
-                <label>Total Games Drawn: </label>
-                <label>{gamesDrawn.length}</label>
-            </div>
-            <div className="session-stat-row">
-                <label>Total Games Forfeited: </label>
-                <label>{gamesForfeited.length}</label>
-            </div>
+            {
+                sessionStats.map((game, idx) => (
+                    <SessionStatRow
+                        key={idx}
+                        text={game.text}
+                        numOfGames={game.numOfGames}
+                    />
+                ))
+            }
         </div>
     );
 };
