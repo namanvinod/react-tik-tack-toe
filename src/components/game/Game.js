@@ -1,4 +1,4 @@
-import { useEffect, Fragment } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { addNewGame, updateSquares, updateGameState, updateCurrentPlayer, resetCurrentGame } from '../../store/gameActions';
@@ -95,24 +95,26 @@ const Game = () => {
     };
 
     return (
-        <Fragment>
-            <div className="game-container">
-                <GameBoard 
-                    squareAction={updateCurrentGame}
-                />
-                <div className="game-details-container">
-                    <GameInfo />
-                    <ActionBtnContainer 
-                        createNewGame={createNewGame}
-                        resetGame={resetGame}
+        <div className="master-container">
+            <div>
+                <div className="game-container">
+                    <GameBoard
+                        squareAction={updateCurrentGame}
                     />
-                </div>             
+                    <div className="game-details-container">
+                        <GameInfo />
+                        <ActionBtnContainer
+                            createNewGame={createNewGame}
+                            resetGame={resetGame}
+                        />
+                    </div>
+                </div>
+                <SessionStat />
             </div>
             <GameStat
                 undoMove={handleUndoMove}
             />
-            <SessionStat />
-        </Fragment>
+        </div>
     );
 };
 
