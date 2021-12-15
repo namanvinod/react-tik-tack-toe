@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import CollapseRow from '../../core/components/collapse-row';
 
 import GameMove from './game-move';
 import './game-stat.css';
@@ -17,14 +18,19 @@ const GameStat = ({ undoMove }) => {
             <div className="current-game-moveset">
                 <div className="section-title">
                     Current Game Moves
-                    {
+                    <CollapseRow 
+                        isDataAvailable={isMoveSetAvailable}
+                        showDetails={showMoves}
+                        handleToggle={(() => setShowMoves(!showMoves))}
+                    />
+                    {/* {
                         isMoveSetAvailable &&
                         <div 
                             className={`fas ${showMoves ? 'fa-chevron-circle-up': 'fa-chevron-circle-down'}`}
                             onClick={(() => setShowMoves(!showMoves))}
                         >
                         </div>
-                    }
+                    } */}
                 </div>
                 {
                     showMoves && (
