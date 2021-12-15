@@ -9,8 +9,8 @@ const ActionBtnContainer = ({ createNewGame, resetGame }) => {
     
     return (
         <div className="action-btn-container">
-            <button onClick={createNewGame} disabled={gameState === GAME_STATE.NEW}>New Game</button>
-            <button onClick={resetGame} disabled={gameState !== GAME_STATE.IN_PROGRESS}>Reset Current Game</button>
+            <button className="btn btn-outline-primary" onClick={createNewGame} disabled={gameState === GAME_STATE.NEW}>New Game</button>
+            <button className="btn btn-outline-primary" onClick={resetGame} disabled={gameState !== GAME_STATE.IN_PROGRESS}>Reset Current Game</button>
         </div>
     );
 };

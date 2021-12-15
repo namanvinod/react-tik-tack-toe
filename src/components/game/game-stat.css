@@ -2,10 +2,6 @@
     padding: 20px 0px 0px 60px;
 }
 
-.current-game-moveset {
-
-}
-
 .current-game-moveset .title {
     font-weight: bold;
 }
@@ -23,6 +19,10 @@
     padding-top: 10px;
 }
 
+.current-game-moveset .current-game-moves li:first-child {
+    padding: 10px 0px 10px 10px;
+}
+
 .current-game-moveset .current-game-moves li:first-child button {
-    display: none
+    display: none;
 }

@@ -5,8 +5,12 @@
 .action-btn-container button {
     padding: 5px;
     margin-left: 5px;;
-  }
+}
   
-  .action-btn-container button:first-child {
+.action-btn-container button:first-child {
     margin-left: 0px;
-  }
+}
+
+.btn:focus {
+    box-shadow: none;
+}
