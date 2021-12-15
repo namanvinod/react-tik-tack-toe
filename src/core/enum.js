@@ -2,7 +2,8 @@ const GAME_STATE = {
     NEW: 'NEW',
     IN_PROGRESS: 'IN_PROGRESS',
     WON: 'WON',
-    DRAWN: 'DRAWN'
+    DRAWN: 'DRAWN',
+    FORFEITED: 'FORFEITED'
 };
 
 const PLAYERS = {

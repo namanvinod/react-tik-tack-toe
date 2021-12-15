@@ -9,6 +9,7 @@ import GameBoard from './game-board';
 import GameInfo from './game-info';
 import GameStat from './game-stat';
 import ActionBtnContainer from '../action-btn-container/action-btn-container';
+import SessionStat from '../session-stat/session-stat';
 
 import { GAME_STATE, PLAYERS } from '../../core/enum';
 import { winningCombination } from '../../core/initialValues';
@@ -81,7 +82,7 @@ const Game = () => {
         return won;
     };
 
-    const createNewGame = () => (dispatch(addNewGame(currentGame)));
+    const createNewGame = () => (dispatch(addNewGame({ ...currentGame, gameState: gameState === GAME_STATE.IN_PROGRESS ? GAME_STATE.FORFEITED : gameState })));
 
     const resetGame = () => (dispatch(resetCurrentGame()));
 
@@ -110,6 +111,7 @@ const Game = () => {
             <GameStat
                 undoMove={handleUndoMove}
             />
+            <SessionStat />
         </Fragment>
     );
 };

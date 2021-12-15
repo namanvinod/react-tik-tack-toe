@@ -15,7 +15,7 @@ const GameStat = ({ undoMove }) => {
     return ( 
         <div className="game-stat-container">
             <div className="current-game-moveset">
-                <div className="title">
+                <div className="section-title">
                     Current Game Moves
                     {
                         isMoveSetAvailable &&
