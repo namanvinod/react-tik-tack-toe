@@ -1,7 +1,5 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { createStore } from '@reduxjs/toolkit';
 
-import gameReducer from './gameReducer';
+import tickTackToeReducers from './tickTackToeReducers';
 
-export const gameStore = configureStore({
-    reducer: gameReducer
-}); 
+export const gameStore = createStore(tickTackToeReducers);
