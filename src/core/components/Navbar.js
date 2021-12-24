@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import './Navbar.css';
 
 const Navbar = ({ loggedIn, manageSession }) => {
-    console.log(loggedIn);
     return (
         <Fragment>
             <div className="nav-container">

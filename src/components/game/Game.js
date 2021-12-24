@@ -47,8 +47,6 @@ const Game = () => {
     };
 
     const checkWinningConditions = () => {
-        if(squares && squares.length === 1) dispatch({ type: 'LOGIN' });
-        
         if(squares && squares.length > 0 && gameState !== GAME_STATE.IN_PROGRESS) {
             dispatch(updateGameState({ gameState: GAME_STATE.IN_PROGRESS, currentPlayer: currentPlayer }));
         }
