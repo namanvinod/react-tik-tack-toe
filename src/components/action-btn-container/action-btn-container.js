@@ -5,7 +5,7 @@ import { GAME_STATE } from '../../core/enum';
 import './action-btn-container.css';
 
 const ActionBtnContainer = ({ createNewGame, resetGame }) => {
-    const gameState = useSelector(state => state.currentGame?.gameState);
+    const gameState = useSelector(({ game }) => game.currentGame?.gameState);
     
     return (
         <div className="action-btn-container">

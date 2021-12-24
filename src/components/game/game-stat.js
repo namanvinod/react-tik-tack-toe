@@ -6,8 +6,8 @@ import GameMove from './game-move';
 import './game-stat.css';
 
 const GameStat = ({ undoMove }) => {
-    const squares = useSelector(state => state.currentGame?.moveSet);
-    const winner = useSelector(state => state.currentGame?.winner);
+    const squares = useSelector(({ game }) => game.currentGame?.moveSet);
+    const winner = useSelector(({ game }) => game.currentGame?.winner);
     const canUndo = !(!!winner);
     
     const [showMoves, setShowMoves] = useState(true);

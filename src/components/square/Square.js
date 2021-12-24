@@ -4,7 +4,7 @@ import { GAME_STATE, PLAYERS } from '../../core/enum';
 import './Square.css';
 
 const Square = ({ squareIndex, squareValue, squareAction }) => {
-    const gameState = useSelector(state => state.currentGame?.gameState);
+    const gameState = useSelector(state => state.game.currentGame?.gameState);
     const classes = classNames({
         square: true,
         'first-player': squareValue === PLAYERS.X,
