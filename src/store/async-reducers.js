@@ -1,7 +1,7 @@
-import { put, takeEvery, delay, all, call } from 'redux-saga/effects';
+import { put, takeEvery, delay, all } from 'redux-saga/effects';
 
 export function* logAsync() {
-    console.log('Inside Log Async', yield);
+    yield console.log('Inside Log Async. It should be called only once');
 }
 
 export function* loginAsync() {
@@ -10,7 +10,6 @@ export function* loginAsync() {
 } 
 
 export function* loginAsyncWatch() {
-    console.log('Inside loginAsync Watch');
     yield takeEvery('LOGIN_ASYNC', loginAsync);
 }
 
