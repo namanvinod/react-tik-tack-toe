@@ -12,7 +12,7 @@ const App = () => {
 
   const manageSession = () => {
     if(loggedIn) dispatch({ type: 'LOGOUT' })
-    else dispatch({ type: 'LOGIN' })
+    else dispatch({ type: 'LOGIN_ASYNC' })
   }; 
 
   return (
