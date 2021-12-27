@@ -7,7 +7,7 @@ import Navbar from './core/components/Navbar'; // Default Export
 import { RouterOutlet } from './core/components/RouteOutlet'; // Named Export
 
 const App = () => {
-  const loggedIn = useSelector(({ session }) => session.login);
+  const loggedIn = useSelector(({ session }) => session.loggedIn);
   const dispatch = useDispatch();
 
   const manageSession = () => {
