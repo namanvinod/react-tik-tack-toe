@@ -15,11 +15,6 @@ import { gameStore } from './store/gameStore';
 ReactDOM.render(
   <Provider store={gameStore}>
     <App />
-    <Popup 
-      show={true}
-    >
-      <Login />
-    </Popup>
   </Provider>,
   document.getElementById('root')
 );
