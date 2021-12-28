@@ -1,0 +1,20 @@
+.login-container {
+    padding: 20px;
+}
+
+.login-container button {
+    margin: 5px 5px 0 10px;
+    padding: 5px;
+}
+
+.login-section {
+    padding: 10px;
+}
+
+.login-section label {
+    margin-right: 10px;
+}
+
+.login-section input {
+    float: right;
+}
