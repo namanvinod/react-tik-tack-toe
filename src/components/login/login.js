@@ -2,17 +2,31 @@ import './login.css';
 
 import { useRef } from 'react';
 
+import { api } from '../../core/api/api';
+
 export default () => {
     const userNameRef = useRef('');
     const passwordRef = useRef('');
 
     const handleLogin = () => {
-        console.log(userNameRef.current, passwordRef);
-    }
+        api.post('/login', { userName: userNameRef.current.value, password: passwordRef.current.value })
+        .then(response => {
+            console.log(response);
+        })
+        .catch(error => {
+            console.log('Error', error);
+        });
+    };
 
     const handleRegister = () => {
-        console.log(userNameRef.current.value, passwordRef);
-    }
+        api.post('/register', { userName: userNameRef.current.value, password: passwordRef.current.value })
+        .then(response => {
+            console.log(response);
+        })
+        .catch(error => {
+            console.log('Error', error);
+        });
+    };
 
     return (
         <div className="login-container">
