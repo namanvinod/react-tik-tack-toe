@@ -1,21 +1,22 @@
 import './login.css';
 
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 import { api } from '../../core/api/api';
+import { useDispatch } from 'react-redux';
 
 export default () => {
     const userNameRef = useRef('');
     const passwordRef = useRef('');
+    const dispatch = useDispatch();
+
+    // useEffect(() => {
+    //     console.log('1')
+    //     userNameRef.current.value = '';
+    // }, []);
 
     const handleLogin = () => {
-        api.post('/login', { userName: userNameRef.current.value, password: passwordRef.current.value })
-        .then(response => {
-            console.log(response);
-        })
-        .catch(error => {
-            console.log('Error', error);
-        });
+        dispatch({ type: 'LOGIN_ASYNC', payload: { userName: userNameRef.current.value, password: passwordRef.current.value } });
     };
 
     const handleRegister = () => {
@@ -44,7 +45,6 @@ export default () => {
             <button onClick={handleRegister}>
                 Register
             </button>
-
         </div>
     );
 };
