@@ -19,6 +19,10 @@ const App = () => {
     if(loggedIn) setShowPopup(false); 
   }, [loggedIn]);
 
+  const handleCLose = () => {
+    setShowPopup(false);
+  };
+
   const manageSession = () => {
     if(loggedIn) dispatch({ type: 'LOGOUT' })
     else {
@@ -28,7 +32,7 @@ const App = () => {
 
   return (
     <>
-      <Popup show={showPopup}>
+      <Popup show={showPopup} handleClose={handleCLose}>
         {showPopup && <Login></Login>}
       </Popup>
       <HashRouter>
