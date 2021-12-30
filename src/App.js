@@ -33,7 +33,7 @@ const App = () => {
   return (
     <>
       <Popup show={showPopup} handleClose={handleCLose}>
-        {showPopup && <Login></Login>}
+        { showPopup && <Login /> }
       </Popup>
       <HashRouter>
         <div className="app-container">

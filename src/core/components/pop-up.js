@@ -6,13 +6,14 @@ const Popup = ({ handleClose, show, children }) => {
     return (
       <div className={showHideClassName}>
         <section className="modal-main">
+          <div className='float-right'>
+            <i className='fas fa-window-close' onClick={handleClose}></i>
+          </div>
+          <div className='error-container'>
+            Error: 
+          </div>            
           <div className='display-inline'>
             {children}
-          </div>
-          <div className='display-inline'>
-            <button type="button" onClick={handleClose}>
-                Close
-            </button>
           </div>
         </section>
       </div>
