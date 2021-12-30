@@ -1,4 +1,4 @@
-import { put, takeEvery, delay, all } from 'redux-saga/effects';
+import { put, takeEvery, all } from 'redux-saga/effects';
 
 import { api } from '../core/api/api';
 

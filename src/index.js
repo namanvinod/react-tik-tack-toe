@@ -7,8 +7,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 
 import App from './App';
-import Popup from './core/components/pop-up';
-import Login from './components/login/login';
 
 import { gameStore } from './store/gameStore';
 

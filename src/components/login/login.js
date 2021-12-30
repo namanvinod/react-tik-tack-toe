@@ -1,19 +1,14 @@
 import './login.css';
 
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 
 import { api } from '../../core/api/api';
 import { useDispatch } from 'react-redux';
 
-export default () => {
+const Login = () => {
     const userNameRef = useRef('');
     const passwordRef = useRef('');
     const dispatch = useDispatch();
-
-    // useEffect(() => {
-    //     console.log('1')
-    //     userNameRef.current.value = '';
-    // }, []);
 
     const handleLogin = () => {
         dispatch({ type: 'LOGIN_ASYNC', payload: { userName: userNameRef.current.value, password: passwordRef.current.value } });
@@ -48,3 +43,5 @@ export default () => {
         </div>
     );
 };
+
+export default Login;
