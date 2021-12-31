@@ -12,8 +12,11 @@ export function* loginAsync({ payload }) {
     yield api.post('/login', { userName: payload?.userName, password: payload?.password })
         .then(response => {
             console.log(response);
-            if(response?.data?.token)
-            localStorage.setItem('auth-token', response?.data?.token);   
+            
+            if(response?.data?.token) {
+                localStorage.setItem('auth-token', response?.data?.token);   
+            }
+
             isLoginSuccess = true;
         })
         .catch(error => {

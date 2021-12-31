@@ -18,6 +18,13 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if(localStorage.getItem('auth-token')) {
+      setShowPopup(false);
+      dispatch({ type: 'LOGIN' });
+    }
+  }, []);
+
+  useEffect(() => {
     if(loggedIn) setShowPopup(false); 
   }, [loggedIn]);
 

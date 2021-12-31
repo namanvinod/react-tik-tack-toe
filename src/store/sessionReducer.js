@@ -8,6 +8,7 @@ const sessionReducer = (state = { loggedIn: false, loginError: '' }, action) => 
             };
         }
         case 'LOGOUT': {
+            localStorage.setItem('auth-token', '');
             return {
                 ...state,
                 loggedIn: false
