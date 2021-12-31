@@ -8,16 +8,22 @@ export function* logAsync() {
 
 export function* loginAsync({ payload }) {
     let isLoginSuccess = false;
+    let loginError = '';
     yield api.post('/login', { userName: payload?.userName, password: payload?.password })
         .then(response => {
             console.log(response);
+            if(response?.data?.token)
+            localStorage.setItem('auth-token', response?.data?.token);   
             isLoginSuccess = true;
         })
         .catch(error => {
             console.log('Error', error);
+            loginError =  error.response?.data;
+            isLoginSuccess = false;
         });
 
     if(isLoginSuccess) yield put({ type: 'LOGIN' });    
+    else yield put({ type: 'LOGIN_ERROR', payload: { loginError } });    
 }
 
 export function* loginAsyncWatch() {

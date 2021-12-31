@@ -13,6 +13,8 @@ const App = () => {
   const [showPopup, setShowPopup] = useState(false);
 
   const loggedIn = useSelector(({ session }) => session.loggedIn);
+  const loginError = useSelector(({ session }) => session.loginError);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -21,6 +23,7 @@ const App = () => {
 
   const handleCLose = () => {
     setShowPopup(false);
+    dispatch({ type: 'LOGIN_ERROR_RESET' });
   };
 
   const manageSession = () => {
@@ -32,7 +35,11 @@ const App = () => {
 
   return (
     <>
-      <Popup show={showPopup} handleClose={handleCLose}>
+      <Popup 
+        show={showPopup} 
+        handleClose={handleCLose} 
+        loginError={loginError}
+      >
         { showPopup && <Login /> }
       </Popup>
       <HashRouter>

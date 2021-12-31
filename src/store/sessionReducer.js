@@ -1,16 +1,28 @@
-const sessionReducer = (state = { loggedIn: false }, action) => {
+const sessionReducer = (state = { loggedIn: false, loginError: '' }, action) => {
     switch(action.type) {
         case 'LOGIN': {
             return {
                 ...state,
+                loginError: '',
                 loggedIn: true
             };
         }
-
         case 'LOGOUT': {
             return {
                 ...state,
                 loggedIn: false
+            };
+        }
+        case 'LOGIN_ERROR': {
+            return {
+                ...state,
+                loginError: action.payload?.loginError
+            };
+        }
+        case 'LOGIN_ERROR_RESET': {
+            return {
+                ...state,
+                loginError: ''
             };
         }
         default: return { ...state };
