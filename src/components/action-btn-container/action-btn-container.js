@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 
 import { GAME_STATE } from '../../core/enum';
 
-import './action-btn-container.css';
+import './action-btn-container.scss';
 
 const ActionBtnContainer = ({ createNewGame, resetGame }) => {
     const gameState = useSelector(({ game }) => game.currentGame?.gameState);
