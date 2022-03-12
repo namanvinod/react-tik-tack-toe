@@ -5,7 +5,6 @@ import sinon from 'sinon';
 import Board from './Board';
 import Square from '../square/Square';
 
-import gameStore from '../../store/gameStore';
 import { Provider } from 'react-redux';
 import gameReducer from '../../store/gameReducer';
 import { createStore } from 'redux';

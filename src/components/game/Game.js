@@ -13,10 +13,10 @@ import { GAME_STATE, PLAYERS } from '../../core/enum';
 import { winningCombination } from '../../core/initialValues';
 
 const Game = () => {
-    const squares = useSelector(({ game }) => game.currentGame?.moveSet);
-    const winner = useSelector(({ game }) => game.currentGame?.winner);
-    const gameState = useSelector(({ game }) => game.currentGame?.gameState);
-    const currentPlayer = useSelector(({ game }) => game.currentGame?.currentPlayer);
+    const squares = useSelector(({ game }) => game?.currentGame?.moveSet) ?? [];
+    const winner = useSelector(({ game }) => game?.currentGame?.winner) ?? '';
+    const gameState = useSelector(({ game }) => game?.currentGame?.gameState) ?? '';
+    const currentPlayer = useSelector(({ game }) => game?.currentGame?.currentPlayer) ?? '';
 
     const dispatch = useDispatch();
     useEffect(() => (checkWinningConditions()), [squares]);
@@ -63,7 +63,7 @@ const Game = () => {
 
     const checkWinner = player => {
         let won = false;
-        const playerSquares = squares.map(square => square && square.squareValue === player ? square.index : '').filter(String);
+        const playerSquares = squares?.map(square => square && square.squareValue === player ? square.index : '').filter(String);
         playerSquares.sort((first, second) => first - second);
         
         if(playerSquares && playerSquares.length >= 3) {

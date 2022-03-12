@@ -8,14 +8,17 @@
 // });
 
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 
 import App from './App';
 import Navbar from './core/components/Navbar';
+import { Provider } from 'react-redux';
+import gameReducer from './store/gameReducer';
+import { createStore } from 'redux';
 
 describe('App', () => {
   let container;
-  beforeEach(() => (container = shallow(<App />)));
+  beforeEach(() => (container = mount(<Provider store={createStore(gameReducer)}><App /></Provider>)));
 
   it('should render Game Component', () => {
     expect(container.containsMatchingElement(<Navbar />)).toEqual(true);

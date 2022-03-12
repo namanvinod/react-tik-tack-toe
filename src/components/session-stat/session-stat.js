@@ -10,7 +10,7 @@ import './session-stat.css';
 const SessionStat = () => {
     const [showStats, setShowStates] = useState(true);
 
-    const games = (useSelector(state => state.game.games)) ?? [];
+    const games = (useSelector(state => state?.game?.games)) ?? [];
     const gamesWonByX = games.filter(game => game.winner === PLAYERS.X);
     const gamesWonByO = games.filter(game => game.winner === PLAYERS.O);
     const gamesDrawn = games.filter(game => game.gameState === GAME_STATE.DRAWN);

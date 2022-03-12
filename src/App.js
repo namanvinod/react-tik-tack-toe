@@ -12,8 +12,8 @@ import { RouterOutlet } from './core/components/RouteOutlet'; // Named Export
 const App = () => {
   const [showPopup, setShowPopup] = useState(false);
 
-  const loggedIn = useSelector(({ session }) => session.loggedIn);
-  const loginError = useSelector(({ session }) => session.loginError);
+  const loggedIn = useSelector(({ session }) => session?.loggedIn);
+  const loginError = useSelector(({ session }) => session?.loginError);
 
   const dispatch = useDispatch();
 
