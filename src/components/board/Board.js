@@ -3,12 +3,12 @@ import Square from '../square/Square';
 import './Board.css';
 
 const Board = ({ squareAction }) => {
-    const squares = useSelector(state => state.game.currentGame?.moveSet);
+    const squares = useSelector(state => state?.game?.currentGame?.moveSet);
     
     const renderSquare = counter => <Square
                                         className="board-square"
                                         squareIndex={counter}
-                                        squareValue={squares.find(sq => sq.index === counter)?.squareValue}
+                                        squareValue={squares?.find(sq => sq.index === counter)?.squareValue}
                                         squareAction={squareAction}
                                     />;
     
