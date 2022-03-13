@@ -4,10 +4,8 @@ import { mount } from 'enzyme';
 
 import Game from './Game';
 import Board from '../board/Board';
-import { GAME_STATE, PLAYERS } from '../../core/enum';
 
 import { Provider } from 'react-redux';
-import gameReducer, { gameStoreInitValue } from '../../store/gameReducer';
 import { createStore } from 'redux';
 import tickTackToeReducers, { defaultState } from '../../store/tickTackToeReducers';
 
@@ -47,9 +45,7 @@ describe('Game Play', () => {
   });
 
   it('updates the value of first square when it is clicked', () => {  
-    console.log('Before Click');
     firstSquare.simulate('click');
-    console.log('After Click');
     expect(firstSquare.text()).toEqual('X');
   });
 
