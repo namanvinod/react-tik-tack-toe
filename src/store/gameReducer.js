@@ -7,7 +7,7 @@ const currentGameInitValue = {
     currentPlayer: PLAYERS.X
 };
 
-const gameStoreInitValue = { 
+export const gameStoreInitValue = { 
     games: [], 
     currentGame: currentGameInitValue
 };
