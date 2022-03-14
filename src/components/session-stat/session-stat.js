@@ -48,7 +48,7 @@ const SessionStat = () => {
                 ))
             }
             {
-                !isDataAvailable && <div className="no--collapsable-data">No stats in this session yet.</div>
+                !isDataAvailable && <div className="no-collapsable-data">No stats in this session yet.</div>
             }
         </div>
     );

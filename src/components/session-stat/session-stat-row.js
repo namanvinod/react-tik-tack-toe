@@ -1,12 +1,11 @@
 import './session-stat-row.css';
 
-const SessionStatRow = ({ text, numOfGames, gameData }) => {
+const SessionStatRow = ({ text, numOfGames }) => {
     return (
         <div className="session-stat-row">
             <label>{text}:</label>
             <label>{numOfGames}</label>
         </div>
-            
     );
 };
 
