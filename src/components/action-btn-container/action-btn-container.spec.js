@@ -71,8 +71,32 @@ describe('Action Btn for "in progress" game state', () => {
         expect(spyCreateNewGame.calledOnce).toBeTruthy();
     });
 
-    it('should not trigger click event on resetGame in case of "in progress" state', () => {
+    it('should trigger click event on resetGame in case of "in progress" state', () => {
         container.find('.btn.btn-outline-primary').at(1).simulate('click');
         expect(spyResetGame.calledOnce).toBeTruthy();
+    });
+});
+
+describe('Action Btn for "won" game state', () => {
+    let container;
+    const spyCreateNewGame = sinon.spy();
+    const spyResetGame = sinon.spy();
+
+    const state = defaultState;
+    state.game.currentGame = { ...defaultState?.game?.currentGame, gameState: GAME_STATE.WON };
+    const store = createStore(tickTackToeReducers, state);
+    
+    beforeEach(() => {
+        container = mount(<Provider store={store}><ActionBtnContainer createNewGame={spyCreateNewGame} resetGame={spyResetGame} /></Provider>);
+    });
+
+    it('should trigger click event on createNewGame in case of "won" state', () => {
+        container.find('.btn.btn-outline-primary').first().simulate('click');
+        expect(spyCreateNewGame.calledOnce).toBeTruthy();
+    });
+
+    it('should not trigger click event on resetGame in case of "won" state', () => {
+        container.find('.btn.btn-outline-primary').at(1).simulate('click');
+        expect(spyResetGame.notCalled).toBeTruthy();
     });
 });
