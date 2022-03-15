@@ -25,38 +25,7 @@ describe('Action Button Container', () => {
 
     it('should render 2 action buttons', () => {
         expect(container.find('.btn.btn-outline-primary').length).toEqual(2);
-    });
-
-    it('should trigger click event on createNewGame in case of "in progress" state', () => {
-        const state = defaultState;
-        state.game.currentGame = { ...defaultState?.game?.currentGame, gameState: GAME_STATE.IN_PROGRESS };
-        const store = createStore(tickTackToeReducers, state);
-        
-        container = mount(<Provider store={store}><ActionBtnContainer createNewGame={spyCreateNewGame} resetGame={spyResetGame} /></Provider>);
-        container.find('.btn-create').first().simulate('click');
-        expect(spyCreateNewGame.calledOnce).toBeTruthy();
-    });
-
-    it('should not trigger click event on resetGame in case of "new" state', () => {
-        const state = defaultState;
-        state.game.currentGame = { ...defaultState?.game?.currentGame, gameState: GAME_STATE.NEW };
-        const store = createStore(tickTackToeReducers, state);
-        // console.log(store.getState(), state);
-
-        container = mount(<Provider store={store}><ActionBtnContainer createNewGame={spyCreateNewGame} resetGame={spyResetGame} /></Provider>);
-        container.find('.btn.btn-outline-primary').at(1).simulate('click');
-        expect(spyResetGame.notCalled).toBeTruthy();
-    });
-    
-    it('should not trigger click event on resetGame in case of "in progress" state', () => {
-        const state = defaultState;
-        state.game.currentGame = { ...defaultState?.game?.currentGame, gameState: GAME_STATE.IN_PROGRESS };
-        const store = createStore(tickTackToeReducers, state);
-     
-        container = mount(<Provider store={store}><ActionBtnContainer createNewGame={spyCreateNewGame} resetGame={spyResetGame} /></Provider>);
-        container.find('.btn.btn-outline-primary').at(1).simulate('click');
-        expect(spyResetGame.calledOnce).toBeTruthy();
-    });
+    });    
 });
 
 describe('Action Btn for "new" game state', () => {
@@ -81,5 +50,29 @@ describe('Action Btn for "new" game state', () => {
         container = mount(<Provider store={store}><ActionBtnContainer createNewGame={spyCreateNewGame} resetGame={spyResetGame} /></Provider>);
         container.find('.btn.btn-outline-primary').at(1).simulate('click');
         expect(spyResetGame.notCalled).toBeTruthy();
+    });
+});
+
+describe('Action Btn for "in progress" game state', () => {
+    let container;
+    const spyCreateNewGame = sinon.spy();
+    const spyResetGame = sinon.spy();
+
+    const state = defaultState;
+    state.game.currentGame = { ...defaultState?.game?.currentGame, gameState: GAME_STATE.IN_PROGRESS };
+    const store = createStore(tickTackToeReducers, state);
+    
+    beforeEach(() => {
+        container = mount(<Provider store={store}><ActionBtnContainer createNewGame={spyCreateNewGame} resetGame={spyResetGame} /></Provider>);
+    });
+
+    it('should trigger click event on createNewGame in case of "in progress" state', () => {
+        container.find('.btn.btn-outline-primary').first().simulate('click');
+        expect(spyCreateNewGame.calledOnce).toBeTruthy();
+    });
+
+    it('should not trigger click event on resetGame in case of "in progress" state', () => {
+        container.find('.btn.btn-outline-primary').at(1).simulate('click');
+        expect(spyResetGame.calledOnce).toBeTruthy();
     });
 });
