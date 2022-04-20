@@ -1,11 +1,24 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { GAME_STATE } from '../../core/enum';
+import { GAME_STATE, PLAYERS } from '../../core/enum';
+import { addCurrentGameToGames, resetCurrentGame, updateGameState } from '../../store/gameActions';
 
 import './action-btn-container.scss';
 
-const ActionBtnContainer = ({ createNewGame, resetGame }) => {
+const ActionBtnContainer = () => {
     const gameState = useSelector(({ game }) => game?.currentGame?.gameState);
+    const winner = useSelector(({ game }) => game?.currentGame?.winner) ?? '';
+    const dispatch = useDispatch();
+    
+    const createNewGame = () => {
+        if(gameState === GAME_STATE.IN_PROGRESS) {
+            dispatch(updateGameState({ gameState: GAME_STATE.FORFEITED, winner: winner, currentPlayer: PLAYERS.NONE }));
+            dispatch(addCurrentGameToGames());
+        }
+        resetGame();
+    };
+
+    const resetGame = () => (dispatch(resetCurrentGame()));
     
     return (
         <div className="action-btn-container">

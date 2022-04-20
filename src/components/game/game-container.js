@@ -4,18 +4,13 @@ import ActionBtnContainer from '../action-btn-container/action-btn-container';
 
 import './game-container.css';
 
-const GameContainer = ({ updateCurrentGame, createNewGame, resetGame }) => {
+const GameContainer = () => {
     return (
         <div className="game-container">
-            <GameBoard
-                squareAction={updateCurrentGame}
-            />
+            <GameBoard />
             <div className="game-details-container">
                 <GameInfo />
-                <ActionBtnContainer
-                    createNewGame={createNewGame}
-                    resetGame={resetGame}
-                />
+                <ActionBtnContainer />
             </div>
         </div>
     );

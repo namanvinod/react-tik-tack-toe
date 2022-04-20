@@ -1,18 +1,33 @@
+import React from 'react';
+
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import CollapseRow from '../../core/components/collapse-row';
 
 import GameMove from './game-move';
 import './game-stat.css';
 
-const GameStat = ({ undoMove }) => {
+import { updateSquares, updateCurrentPlayer } from '../../store/gameActions';
+import { PLAYERS } from '../../core/enum';
+
+const GameStat = () => {
     const squares = useSelector(({ game }) => game?.currentGame?.moveSet);
     const winner = useSelector(({ game }) => game?.currentGame?.winner);
     const canUndo = !(!!winner);
     
     const [showMoves, setShowMoves] = useState(true);
     const isMoveSetAvailable = squares && squares.length > 0;
-    
+
+    const dispatch = useDispatch();
+
+    const handleUndoMove = squareIndex => {
+        const arrIndex = squares.findIndex(square => square.index === squareIndex);
+        const updatedSquares = squares.slice(0, arrIndex + 1);
+        const lastCurrentPlayer = updatedSquares[arrIndex].squareValue;
+        dispatch(updateCurrentPlayer({ currentPlayer: lastCurrentPlayer === PLAYERS.X ? PLAYERS.O : PLAYERS.X }));
+        dispatch(updateSquares({ squares: updatedSquares }));
+    };
+
     return ( 
         <div className="game-stat-container">
             <div className="current-game-moveset">
@@ -36,7 +51,7 @@ const GameStat = ({ undoMove }) => {
                                             moveNumber={squares.length - idx}
                                             squareIndex={squareIndex}
                                             squareValue={squareValue}
-                                            undoMove={undoMove}
+                                            undoMove={handleUndoMove}
                                             canUndo={canUndo}
                                         />
                                     ))
@@ -50,4 +65,4 @@ const GameStat = ({ undoMove }) => {
     );
 };
 
-export default GameStat;
+export default React.memo(GameStat);

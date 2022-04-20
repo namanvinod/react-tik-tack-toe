@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { GAME_STATE, PLAYERS } from '../../core/enum';
 
@@ -54,4 +54,4 @@ const SessionStat = () => {
     );
 };
 
-export default SessionStat;
+export default React.memo(SessionStat);

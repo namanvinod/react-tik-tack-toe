@@ -1,3 +1,4 @@
+import React from 'react';
 import './session-stat-row.css';
 
 const SessionStatRow = ({ text, numOfGames }) => {
@@ -9,4 +10,4 @@ const SessionStatRow = ({ text, numOfGames }) => {
     );
 };
 
-export default SessionStatRow;
+export default React.memo(SessionStatRow);

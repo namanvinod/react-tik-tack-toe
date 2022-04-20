@@ -1,3 +1,5 @@
+import React from 'react';
+
 const CollapseRow = ({ isDataAvailable, showData, handleToggle }) => {
     return (
         <>
@@ -13,4 +15,4 @@ const CollapseRow = ({ isDataAvailable, showData, handleToggle }) => {
     );
 };
 
-export default CollapseRow;
+export default React.memo(CollapseRow);
