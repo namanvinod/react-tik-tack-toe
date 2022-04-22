@@ -1,4 +1,4 @@
-import './pop-up.css';
+import './PopUp.css';
 
 const Popup = ({ handleClose, show, children, loginError }) => {
     const showHideClassName = show ? 'modal display-block' : 'modal display-none';

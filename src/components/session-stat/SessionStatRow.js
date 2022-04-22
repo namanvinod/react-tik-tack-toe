@@ -1,5 +1,5 @@
 import React from 'react';
-import './session-stat-row.css';
+import './SessionStatRow.css';
 
 const SessionStatRow = ({ text, numOfGames }) => {
     return (

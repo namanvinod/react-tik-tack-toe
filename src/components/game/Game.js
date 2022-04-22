@@ -1,8 +1,8 @@
 import './Game.css';
 
-import GameStat from './game-stat';
-import SessionStat from '../session-stat/session-stat';
-import GameContainer from './game-container';
+import GameStat from './GameStat';
+import SessionStat from '../session-stat/SessionStat';
+import GameContainer from './GameContainer';
 
 const Game = () => {
     return (

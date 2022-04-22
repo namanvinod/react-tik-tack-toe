@@ -5,7 +5,7 @@ import { HashRouter } from 'react-router-dom';
 import './App.css';
 
 import Navbar from './core/components/Navbar'; // Default Export
-import Popup from './core/components/pop-up';
+import Popup from './core/components/PopUp';
 import Login from './components/login/login';
 import { RouterOutlet } from './core/components/RouteOutlet'; // Named Export
 

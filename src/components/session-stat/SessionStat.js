@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { GAME_STATE, PLAYERS } from '../../core/enum';
 
-import CollapseRow from '../../core/components/collapse-row';
-import SessionStatRow from './session-stat-row';
+import CollapseRow from '../../core/components/CollapseRow';
+import SessionStatRow from './SessionStatRow';
 
-import './session-stat.css';
+import './SessionStat.css';
 
 const SessionStat = () => {
     const [showStats, setShowStates] = useState(true);

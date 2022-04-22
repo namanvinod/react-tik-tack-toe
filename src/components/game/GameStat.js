@@ -2,10 +2,10 @@ import React from 'react';
 
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import CollapseRow from '../../core/components/collapse-row';
+import CollapseRow from '../../core/components/CollapseRow';
 
-import GameMove from './game-move';
-import './game-stat.css';
+import GameMove from './GameMove';
+import './GameStat.css';
 
 import { updateSquares, updateCurrentPlayer } from '../../store/gameActions';
 import { PLAYERS } from '../../core/enum';

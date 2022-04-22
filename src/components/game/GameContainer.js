@@ -1,8 +1,8 @@
-import GameBoard from './game-board';
-import GameInfo from './game-info';
-import ActionBtnContainer from '../action-btn-container/action-btn-container';
+import GameBoard from './GameBoard';
+import GameInfo from './GameInfo';
+import ActionBtnContainer from '../action-btn-container/ActionBtnContainer';
 
-import './game-container.css';
+import './GameContainer.css';
 
 const GameContainer = () => {
     return (
