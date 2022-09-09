@@ -1,7 +1,6 @@
 {
   "name": "react-tick-tack-toe",
   "version": "0.1.0",
-  "homepage": "react-tick-tack-toe",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.2",
