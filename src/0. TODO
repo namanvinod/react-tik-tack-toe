@@ -1,0 +1,11 @@
+1. Separate components into folders -- DONE
+2. Breakdown Game Component into Board, GameInfo and Session Stats -- DONE
+3. Add "Go To Step" functionality -- DONE 
+4. Use Game State Properly -- DONE
+5. Use Flex properly -- DONE
+6. Show Session Stats -- DONE
+7. Add AutoPlay feature in a modal for completed games  -- DONE 
+8. Remove Comments -- DONE
+9. Add Integration Tests
+10. Fix Unit Tests
+
