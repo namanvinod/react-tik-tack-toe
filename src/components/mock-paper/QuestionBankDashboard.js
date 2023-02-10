@@ -1,9 +1,27 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { questonBank } from "./questionBank";
 import "./QuestionBankDashboard.css";
+import html2canvas from "html2canvas";
+import { jsPDF } from "jspdf";
 
 export const QuestionBankDashboard = () => {
   const [selectedQuestions, setSelecteduestions] = useState([]);
+
+  const printRef = useRef();
+
+  const handleDownloadPdf = async () => {
+    const element = printRef.current;
+    const canvas = await html2canvas(element);
+    const data = canvas.toDataURL("image/png");
+
+    const pdf = new jsPDF();
+    const imgProperties = pdf.getImageProperties(data);
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
+
+    pdf.addImage(data, "PNG", 0, 0, pdfWidth, pdfHeight);
+    pdf.save("print.pdf");
+  };
 
   const onQuestionSelect = (question) => {
     const updatedQuestion = selectedQuestions.find(
@@ -91,7 +109,15 @@ export const QuestionBankDashboard = () => {
               );
             })}
           </div>
-          <div className="sample-question-paper">
+          <div style={{ float: "right", margin: "0 30px" }}>
+            <button onClick={handleDownloadPdf}>
+              Download Sample Question Paper
+            </button>
+          </div>
+          <div className="sample-question-paper" ref={printRef}>
+            <div style={{ marginLeft: "300px", marginTop: "60px" }}>
+              <h3>Sample Question Paper</h3>
+            </div>
             {selectedQuestions.map((selectedQuestion) => {
               return (
                 <>
